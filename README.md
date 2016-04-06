@@ -10,6 +10,9 @@ Voting System
 # Authors
 
 * Jose Labra
+* Cecilia Tudela 
+* Johan Arif Clavijo Muñoz
+* Gabriela Agnieszka Lagowska
 
 
 
