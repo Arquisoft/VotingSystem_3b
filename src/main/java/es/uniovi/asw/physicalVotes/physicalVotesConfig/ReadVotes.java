@@ -5,5 +5,5 @@ package es.uniovi.asw.physicalVotes.physicalVotesConfig;
  * cada colegio electoral.
  */
 public interface ReadVotes {
-
+	
 }

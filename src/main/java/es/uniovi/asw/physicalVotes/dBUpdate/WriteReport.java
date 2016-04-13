@@ -5,5 +5,5 @@ package es.uniovi.asw.physicalVotes.dBUpdate;
  * escribir una línea en el fichero de log.
  */
 public interface WriteReport {
-
+	
 }
