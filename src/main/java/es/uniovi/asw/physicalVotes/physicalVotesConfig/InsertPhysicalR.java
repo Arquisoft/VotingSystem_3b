@@ -2,8 +2,6 @@ package es.uniovi.asw.physicalVotes.physicalVotesConfig;
 
 import java.util.ArrayList;
 import java.util.Map;
-
-import es.uniovi.asw.model.Votos;
 import es.uniovi.asw.physicalVotes.dBUpdate.InsertVotesP;
 
 /*
@@ -31,12 +29,13 @@ public class InsertPhysicalR implements Insert {
 	@Override
 	public void addVoto(InsertVotesP database) {
 		Map<Integer, ArrayList<String>> map = reader.leerFichero(ruta);
-		Votos votos;
+		//Votos votos;
 		for(Map.Entry<Integer, ArrayList<String>> entry : map.entrySet()){
-			System.out.println(entry.getKey());
-//			for(String s: entry.getValue()){
-//				System.out.println(s);
-//			}
+			System.out.print(entry.getKey() + "\t");
+			for(String voto: entry.getValue()){
+				System.out.print(voto + "\t");
+			}
+			System.out.println();
 		}
 	}
 

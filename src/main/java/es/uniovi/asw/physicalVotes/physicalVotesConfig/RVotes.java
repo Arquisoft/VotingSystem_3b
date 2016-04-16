@@ -67,10 +67,10 @@ public class RVotes implements ReadVotes{
 					
 					switch (cell.getCellType()) {
 					case Cell.CELL_TYPE_NUMERIC:
-						System.out.print(cell.getNumericCellValue() + "\t");
+						//System.out.print(cell.getNumericCellValue() + "\t");
 						break;
 					case Cell.CELL_TYPE_STRING:
-						System.out.print(cell.getStringCellValue() + "\t");
+						//System.out.print(cell.getStringCellValue() + "\t");
 						break;
 					}
 					
@@ -78,10 +78,8 @@ public class RVotes implements ReadVotes{
 					workbook.close();
 					
 				}
-				System.out.println("");
 			}
 			file.close();
-			System.out.println();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

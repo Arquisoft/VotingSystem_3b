@@ -18,5 +18,6 @@ public class Main {
     LOG.info("Landing page access");
     return new ModelAndView("landing");
   }
+
   
 }
