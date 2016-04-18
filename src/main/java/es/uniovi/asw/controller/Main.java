@@ -74,4 +74,9 @@ public class Main {
 		
 		return new ModelAndView("physical");
 	}
+<<<<<<< HEAD
+=======
+	
+
+>>>>>>> dd9460620d80f4c5130b02d5ec4ec55def068d78
 }
