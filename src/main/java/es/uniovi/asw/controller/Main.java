@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.uniovi.asw.model.Votacion;
@@ -66,15 +67,27 @@ public class Main {
 	
 	
 
-	@RequestMapping("/physical")
-	public ModelAndView cargarVotosFisicos() throws Exception {
-		
+	/*
+	 * @RequestMapping("/physical") public ModelAndView cargarVotosFisicos()
+	 * throws Exception {
+	 * 
+	 * WreportR report1 = new WreportR(new WreportP()); Insert r1 = new
+	 * InsertPhysicalR(new RVotes(),
+	 * "src/test/resources/votacionesFisicas.xlsx"); r1.addVoto(new
+	 * InsertVotesP(report1));
+	 * 
+	 * 
+	 * return new ModelAndView("physical"); }
+	 */
+
+	@RequestMapping(value = "/physical", method = RequestMethod.POST)
+	public String cargarVotosFisicos() {
 		WreportR report1 = new WreportR(new WreportP());
 		Insert r1 = new InsertPhysicalR(new RVotes(), "src/test/resources/votacionesFisicas.xlsx");
 		r1.addVoto(new InsertVotesP(report1));
+		System.out.println("lalala");
 
-		
-		return new ModelAndView("physical");
+		return "physical";
 	}
 	
 	@RequestMapping("/guardarVotacion")

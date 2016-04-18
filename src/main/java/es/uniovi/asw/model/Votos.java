@@ -1,26 +1,25 @@
 package es.uniovi.asw.model;
 
 public class Votos {
-	
 	private Long id;
 	private String tipoVoto;
-	private Long opcionEscogida; //id
+	private Long opcionEscogida; // id
 	private int totalVotos;
 	private Long idVotacion; //id
 	private String colegioElectoral; //id
 	
 	
-	
-	
-	public Votos(String tipoVoto, Long opcionEscogida, int totalVotos,
-			Long idVotacion, String colegioElectoral) {
-		super();		
+	public Votos() { }
+
+	public Votos(String tipoVoto, Long opcionEscogida, int totalVotos, Long idVotacion, String colegioElectoral) {
+		super();
 		this.tipoVoto = tipoVoto;
 		this.opcionEscogida = opcionEscogida;
 		this.totalVotos = totalVotos;
 		this.idVotacion = idVotacion;
 		this.colegioElectoral = colegioElectoral;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -51,6 +50,7 @@ public class Votos {
 	public void setIdVotacion(Long idVotacion) {
 		this.idVotacion = idVotacion;
 	}
+
 	public String getColegioElectoral() {
 		return colegioElectoral;
 	}
@@ -59,5 +59,6 @@ public class Votos {
 	}
 
 	
+
 
 }
