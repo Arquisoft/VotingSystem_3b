@@ -6,9 +6,39 @@
 	rel="stylesheet" />
 </head>
 <body>
-	<div class="header" th:fragment="cabecera">
-		<h1>Voting System</h1>
-		<h2>PÁGINA DE CONFIGURACIÓN DE LAS VOTACIONES</h2>
-	</div>
+		<label for="diainicio">Dia inicio </label>
+		<input id="diainicio" type="date" class="form-control" />
+		
+		<label for="horainicio">Hora inicio </label>
+		<input id="horainicio" type="time" class="form-control" placeholder="hh:mm" />
+			
+		
+		
+		<label for="diafin">Dia fin </label>
+		<input id="diafin" type="date" class="form-control" />
+		
+		<label for="horafin">Hora inicio </label>
+		<input id="horafin" type="time" class="form-control" placeholder="hh:mm" />
+		
+		
+		<br />
+		<br />
+		
+		<form action="/guardarVotacion" method="post" class="form-horizontal">
+		 	<label for="opciones">Tipo de votación:</label>
+	           	 <select>
+	              	  <!-- Iterate on ${opciones} -->
+	                 <option>Referendum</option>
+	               	 <option>Generales</option>
+	            </select>
+	            
+	     
+		
+			<br /><button type="submit" class="btn btn-primary">Enviar</button>
+		
+		
+    	</form>
+    	
+    	
 </body>
 </html>

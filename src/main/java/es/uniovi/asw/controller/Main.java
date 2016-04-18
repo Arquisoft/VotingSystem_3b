@@ -63,6 +63,8 @@ public class Main {
 		return new ModelAndView("config");
 
 	}
+	
+	
 
 	@RequestMapping("/physical")
 	public ModelAndView cargarVotosFisicos() throws Exception {
@@ -73,6 +75,12 @@ public class Main {
 
 		
 		return new ModelAndView("physical");
+	}
+	
+	@RequestMapping("/guardarVotacion")
+	public ModelAndView guardarConfigVotacion() throws Exception {
+						
+		return new ModelAndView("exitoGuardarVotacion");
 	}
 
 

@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,15 +31,26 @@ public class MainControllerTest {
   private WebApplicationContext context;
 
   private MockMvc mvc;
+  private EmbeddedDatabase db;
 
   @Before
   public void setUp() throws Exception {
     mvc = MockMvcBuilders.webAppContextSetup(context).build();
+    db = new EmbeddedDatabaseBuilder()
+	.setType(EmbeddedDatabaseType.H2)
+	.addScript("src/main/java/es/uniovi/asw/script.sql")
+	.build();
   }
 
   @Test
   public void testLanding() throws Exception {
     mvc.perform(get("/")).andExpect(status().isOk()).andExpect(content().string(containsString("Voting")));
+//	  String v = db.toString();
+//	  System.out.println(v);
   }
+  
+  
+  
+  
 
 }
