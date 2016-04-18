@@ -1,8 +1,13 @@
 package es.uniovi.asw.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +26,20 @@ public class Votacion {
 	private List<String> tipoVotacion = 
 									   Arrays.asList("Referendum", "Generales");
 		    						   //Referendum en el proyecto piloto
+	Calendar date = Calendar.getInstance();
+
+	DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+	public Votacion() {
+		try {
+			diaInicio = dateFormat.parse("Sun Apr 17 18:52:54 CEST 2016");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	public Long getId() {
+	
 		return id;
 	}
 	public void setId(Long id) {
@@ -59,7 +77,6 @@ public class Votacion {
 	public void setTipoVotacion(List<String> tipoVotacion) {
 		this.tipoVotacion = tipoVotacion;
 	}
-	
 	
 	
 
