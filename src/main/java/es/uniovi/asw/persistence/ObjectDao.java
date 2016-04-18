@@ -48,6 +48,9 @@ public interface ObjectDao {
 			String colegioEletoral, String tipoVoto);
 	public Votante findVotos(Long opcion);
 	public List<Votos> findAllVotos();
+
+	
+	public void restoreDatabase();
 	
 	
 

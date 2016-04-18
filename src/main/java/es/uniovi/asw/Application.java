@@ -25,9 +25,9 @@ public class Application {
 		app.run(args);
 		
 		
-		WreportR report1 = new WreportR(new WreportP());
-		Insert r1 = new InsertPhysicalR(new RVotes(), "src/test/resources/votacionesFisicas.xlsx");
-		r1.addVoto(new InsertVotesP(report1));
+//		WreportR report1 = new WreportR(new WreportP());
+//		Insert r1 = new InsertPhysicalR(new RVotes(), "src/test/resources/votacionesFisicas.xlsx");
+//		r1.addVoto(new InsertVotesP(report1));
 
 	}
 

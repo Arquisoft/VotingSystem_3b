@@ -71,7 +71,7 @@ public class Jdbc {
 		return DriverManager.getConnection(URL, USER, PASS);
 	}
 
-	private static void crearDB() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public static void crearDB() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		 //ejecutamos el script de creacion de la BD
         
         Class.forName(DRIVER).newInstance();
