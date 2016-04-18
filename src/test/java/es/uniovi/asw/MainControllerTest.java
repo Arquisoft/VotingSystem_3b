@@ -31,22 +31,17 @@ public class MainControllerTest {
   private WebApplicationContext context;
 
   private MockMvc mvc;
-  private EmbeddedDatabase db;
 
   @Before
   public void setUp() throws Exception {
     mvc = MockMvcBuilders.webAppContextSetup(context).build();
-    db = new EmbeddedDatabaseBuilder()
-	.setType(EmbeddedDatabaseType.H2)
-	.addScript("src/main/java/es/uniovi/asw/script.sql")
-	.build();
+  
   }
 
   @Test
   public void testLanding() throws Exception {
     mvc.perform(get("/")).andExpect(status().isOk()).andExpect(content().string(containsString("Voting")));
-//	  String v = db.toString();
-//	  System.out.println(v);
+
   }
   
   
