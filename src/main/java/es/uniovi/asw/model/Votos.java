@@ -1,25 +1,18 @@
 package es.uniovi.asw.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
 public class Votos {
-	
-	
-	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private Long id;
 	private String tipoVoto;
-	private Long opcionEscogida; //id
+	private Long opcionEscogida; // id
 	private int totalVotos;
-	private Long idVotacion; //id
-	private Long colegioElectoral; //id
+	private Long idVotacion; // id
+	private String colegioElectoral; // id
 
-	
-	public Votos() { }	
-	
+	public Votos() {
+	}
 
-	public Votos(String tipoVoto, Long opcionEscogida, int totalVotos,
-			Long idVotacion, Long colegioElectoral) {
+	public Votos(String tipoVoto, Long opcionEscogida, int totalVotos, Long idVotacion, String colegioElectoral) {
 		super();
 		this.tipoVoto = tipoVoto;
 		this.opcionEscogida = opcionEscogida;
@@ -27,7 +20,6 @@ public class Votos {
 		this.idVotacion = idVotacion;
 		this.colegioElectoral = colegioElectoral;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -69,26 +61,21 @@ public class Votos {
 		this.idVotacion = idVotacion;
 	}
 
-	public Long getColegioElectoral() {
+	public String getColegioElectoral() {
 		return colegioElectoral;
 	}
 
-	public void setColegioElectoral(Long colegioElectoral) {
+	public void setColegioElectoral(String colegioElectoral) {
 		this.colegioElectoral = colegioElectoral;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((colegioElectoral == null) ? 0 : colegioElectoral.hashCode());
-		result = prime * result
-				+ ((idVotacion == null) ? 0 : idVotacion.hashCode());
-		result = prime * result
-				+ ((opcionEscogida == null) ? 0 : opcionEscogida.hashCode());
+		result = prime * result + ((colegioElectoral == null) ? 0 : colegioElectoral.hashCode());
+		result = prime * result + ((idVotacion == null) ? 0 : idVotacion.hashCode());
+		result = prime * result + ((opcionEscogida == null) ? 0 : opcionEscogida.hashCode());
 		return result;
 	}
 
@@ -118,6 +105,5 @@ public class Votos {
 			return false;
 		return true;
 	}
-	
 
 }

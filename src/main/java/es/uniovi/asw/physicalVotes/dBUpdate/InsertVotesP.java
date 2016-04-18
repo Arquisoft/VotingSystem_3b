@@ -1,6 +1,7 @@
 package es.uniovi.asw.physicalVotes.dBUpdate;
 
 import es.uniovi.asw.model.Votos;
+import es.uniovi.asw.physicalVotes.dBUpdate.persistence.PersistenceFactory;
 
 
 /*
@@ -24,7 +25,7 @@ public class InsertVotesP implements Insert {
 	@Override
 	public void insertar(Votos v) {
 		//if(reportR.validarVotante(v)){
-			//PersistenceFactory.getVotantesPers().insert(v, reportR);
+			PersistenceFactory.getPhysicalVotesPers().insert(v);
 		//}
 	}
 	
