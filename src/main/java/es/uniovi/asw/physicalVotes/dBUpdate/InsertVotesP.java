@@ -23,9 +23,9 @@ public class InsertVotesP implements Insert {
 	 * para que sea almacenado en el fichero de LOG
 	 */
 	@Override
-	public void insertar(Votos v) {
+	public boolean insertar(Votos v) {
 		//if(reportR.validarVotante(v)){
-			PersistenceFactory.getPhysicalVotesPers().insert(v);
+			return PersistenceFactory.getPhysicalVotesPers().insert(v);
 		//}
 	}
 	

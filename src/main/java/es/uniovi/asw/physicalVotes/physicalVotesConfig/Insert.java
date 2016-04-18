@@ -7,5 +7,5 @@ import es.uniovi.asw.physicalVotes.dBUpdate.InsertVotesP;
  * añadir los datos en la base de datos.
  */
 public interface Insert {
-	public void addVoto(InsertVotesP database);
+	public boolean addVoto(InsertVotesP database);
 }

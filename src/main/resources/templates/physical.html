@@ -8,7 +8,10 @@
 <body>
 	<div class="header" th:fragment="cabecera">
 		<h1>Voting System</h1>
-		<h2>Los votos físicos se han cargado correctamente</h2>
+
+		<h2>
+			<span th:text="${resultado}"></span>
+		</h2>
 	</div>
 </body>
 </html>

@@ -2,10 +2,7 @@ package es.uniovi.asw.physicalVotes.dBUpdate.persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.springframework.jdbc.core.ResultSetExtractor;
 
 import es.uniovi.asw.model.Votos;
 import es.uniovi.asw.physicalVotes.dBUpdate.Jdbc;
@@ -13,7 +10,7 @@ import es.uniovi.asw.physicalVotes.dBUpdate.Jdbc;
 public class PhysicalVotesPersImpl implements PhysicalVotesPers {
 
 	@Override
-	public void insert(Votos v) {
+	public boolean insert(Votos v) {
 		Connection c;
 		String error = "";
 
@@ -38,26 +35,10 @@ public class PhysicalVotesPersImpl implements PhysicalVotesPers {
 			System.out.println(error);
 			e.printStackTrace();
 			// reportR.setLog("ERROR: " + error);
+			return false;
 		}
 
-		/*
-		 * Connection c; String error = "";
-		 * 
-		 * // if(reportR.validarVotante(v)){ try { c = Jdbc.getConnection();
-		 * PreparedStatement ps = c.prepareStatement("SELECT * FROM OPCION");
-		 * 
-		 * ResultSet rs = ps.executeQuery();
-		 * 
-		 * System.out.println("OPCIONESSS:"); while(rs.next()){
-		 * System.out.println("OPCION: " + rs.getString(2)); }
-		 * 
-		 * 
-		 * ps.close(); c.close();
-		 * 
-		 * } catch (SQLException e) { error =
-		 * "El voto no se ha podido cargar correctamente en la base de datos.";
-		 * System.out.println(error); // reportR.setLog("ERROR: " + error); }
-		 */
+		return true;
 
 	}
 

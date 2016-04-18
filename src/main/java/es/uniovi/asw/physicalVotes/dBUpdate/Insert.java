@@ -9,6 +9,6 @@ import es.uniovi.asw.model.Votos;
  */
 public interface Insert {
 	
-	public void insertar(Votos v);
+	public boolean insertar(Votos v);
 	
 }

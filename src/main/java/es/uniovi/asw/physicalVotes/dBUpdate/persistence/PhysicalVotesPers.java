@@ -5,7 +5,7 @@ import es.uniovi.asw.model.Votos;
 
 public interface PhysicalVotesPers {
 
-	public void insert(Votos v);
+	public boolean insert(Votos v);
 	
 	public void delete();
 

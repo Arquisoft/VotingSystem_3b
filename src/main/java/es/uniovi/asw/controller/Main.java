@@ -80,14 +80,18 @@ public class Main {
 	 * return new ModelAndView("physical"); }
 	 */
 
-	@RequestMapping(value = "/physical", method = RequestMethod.POST)
-	public String cargarVotosFisicos() {
+	@RequestMapping("/physical")
+	public ModelAndView cargarVotosFisicos() {
 		WreportR report1 = new WreportR(new WreportP());
 		Insert r1 = new InsertPhysicalR(new RVotes(), "src/test/resources/votacionesFisicas.xlsx");
-		r1.addVoto(new InsertVotesP(report1));
-		System.out.println("lalala");
+		boolean exito = r1.addVoto(new InsertVotesP(report1));
 
-		return "physical";
+		if(exito)
+			return new ModelAndView("physical").addObject("resultado", "Se han almacenado todos los datos con éxito en la base de datos.");
+		else
+			return new ModelAndView("physical").addObject("resultado", "No se han podido almacenar todos los datos.");
+		
+		
 	}
 	
 	@RequestMapping("/guardarVotacion")

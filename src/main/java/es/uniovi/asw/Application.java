@@ -5,13 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import es.uniovi.asw.physicalVotes.dBUpdate.InsertVotesP;
-import es.uniovi.asw.physicalVotes.dBUpdate.WreportR;
-import es.uniovi.asw.physicalVotes.physicalVotesConfig.Insert;
-import es.uniovi.asw.physicalVotes.physicalVotesConfig.InsertPhysicalR;
-import es.uniovi.asw.physicalVotes.physicalVotesConfig.RVotes;
-import es.uniovi.asw.physicalVotes.reportWriter.WreportP;
-
 @EnableAutoConfiguration
 @SpringBootApplication
 public class Application {

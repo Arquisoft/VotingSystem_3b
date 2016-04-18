@@ -29,10 +29,10 @@ public class InsertPhysicalR implements Insert {
 	}
 
 	@Override
-	public void addVoto(InsertVotesP database) {
+	public boolean addVoto(InsertVotesP database) {
 		Map<Integer, ArrayList<String>> map = reader.leerFichero(ruta);
 		Votos votos;
-
+		boolean exito = true;
 		for (Map.Entry<Integer, ArrayList<String>> entry : map.entrySet()) {
 			System.out.print(entry.getKey() + "\t");
 			for (String voto : entry.getValue()) {
@@ -41,12 +41,14 @@ public class InsertPhysicalR implements Insert {
 
 			votos = new Votos(entry.getValue().get(0), (long) Double.parseDouble(entry.getValue().get(1)),
 					(int) Double.parseDouble(entry.getValue().get(2)),
-					(long) Double.parseDouble(entry.getValue().get(3)), entry.getValue().get(4));
+					(long) Double.parseDouble(entry.getValue().get(3)), entry.getValue().get(4).toString());
 
-			database.insertar(votos);
-
+			boolean e = database.insertar(votos);
+			if(!e)
+				exito = false;
 			System.out.println();
 		}
+		return exito;
 	}
 
 }
