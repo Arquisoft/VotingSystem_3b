@@ -50,5 +50,6 @@ public class Main {
 		
 		return new ModelAndView("physical");
 	}
+	
 
 }
