@@ -1,4 +1,4 @@
-package es.uniovi.asw.physicalVotes.dBUpdate.persistence;
+package es.uniovi.asw.persistence;
 
 import es.uniovi.asw.model.Votos;
 

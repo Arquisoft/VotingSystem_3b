@@ -1,7 +1,7 @@
 package es.uniovi.asw.physicalVotes.dBUpdate;
 
 import es.uniovi.asw.model.Votos;
-import es.uniovi.asw.physicalVotes.dBUpdate.persistence.PersistenceFactory;
+import es.uniovi.asw.persistence.PersistenceFactory;
 
 
 /*

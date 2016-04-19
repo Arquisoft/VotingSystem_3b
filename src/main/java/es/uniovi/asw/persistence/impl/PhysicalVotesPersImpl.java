@@ -1,11 +1,12 @@
-package es.uniovi.asw.physicalVotes.dBUpdate.persistence;
+package es.uniovi.asw.persistence.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import es.uniovi.asw.model.Votos;
-import es.uniovi.asw.physicalVotes.dBUpdate.Jdbc;
+import es.uniovi.asw.persistence.PhysicalVotesPers;
+import es.uniovi.asw.persistence.config.Jdbc;
 
 public class PhysicalVotesPersImpl implements PhysicalVotesPers {
 
@@ -18,7 +19,7 @@ public class PhysicalVotesPersImpl implements PhysicalVotesPers {
 		try {
 			c = Jdbc.getConnection();
 			PreparedStatement ps = c.prepareStatement(
-					"INSERT INTO VOTOS (TIPOVOTO, OPCIONESCOGIDA, TOTALVOTOS, IDVOTACION, COLEGIOELECTORAL) VALUES ( ?, ?, ?, ?, ?)");
+					"INSERT INTO VOTOS(TIPOVOTO, OPCIONESCOGIDA, TOTALVOTOS, IDVOTACION, COLEGIOELECTORAL) VALUES ( ?, ?, ?, ?, ?)");
 
 			ps.setString(1, v.getTipoVoto());
 			ps.setLong(2, v.getOpcionEscogida());

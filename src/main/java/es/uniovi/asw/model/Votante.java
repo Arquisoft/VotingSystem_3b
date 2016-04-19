@@ -5,6 +5,17 @@ public class Votante {
 	private String tipovoto;
 	private boolean estado;
 	private Long idVotacion;
+	
+	
+	public Votante(){}
+	
+	public Votante(String nif, String tipovoto, boolean estado, Long idVotacion) {
+		super();
+		this.nif = nif;
+		this.tipovoto = tipovoto;
+		this.estado = estado;
+		this.idVotacion = idVotacion;
+	}
 	public String getNif() {
 		return nif;
 	}

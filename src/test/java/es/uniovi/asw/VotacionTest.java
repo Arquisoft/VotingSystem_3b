@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.uniovi.asw.model.Votacion;
-import es.uniovi.asw.persistence.ObjectDaoImpl;
+import es.uniovi.asw.persistence.config.ObjectDaoImpl;
 
 public class VotacionTest {
 	

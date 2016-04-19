@@ -1,4 +1,4 @@
-package es.uniovi.asw.persistence;
+package es.uniovi.asw.persistence.config;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package es.uniovi.asw.persistence;
+package es.uniovi.asw.persistence.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -93,6 +93,7 @@ public class Jdbc {
         stm.execute(database.getProperty("CREAR_TABLA_OPCION"));
         stm.execute(database.getProperty("CREAR_TABLA_VOTOS"));
        // stm.execute("truncate table CENSOS");
+ 
         stm.close();
         con.close();
 		
