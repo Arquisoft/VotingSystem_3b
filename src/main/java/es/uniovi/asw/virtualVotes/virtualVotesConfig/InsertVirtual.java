@@ -9,6 +9,8 @@ import es.uniovi.asw.virtualVotes.dBUpdate.InsertVirtualVotesP;
 public interface InsertVirtual {
 
 	public void setTypeVote(InsertVirtualVotesP database);
+
+	public void getVoteInfo(InsertVirtualVotesP database);
 	
 	
 }

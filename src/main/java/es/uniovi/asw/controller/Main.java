@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.uniovi.asw.model.TipoVoto;
 import es.uniovi.asw.model.Votacion;
 import es.uniovi.asw.model.Votante;
+import es.uniovi.asw.model.Votos;
 import es.uniovi.asw.physicalVotes.dBUpdate.InsertVotesP;
 import es.uniovi.asw.physicalVotes.dBUpdate.WreportR;
 import es.uniovi.asw.physicalVotes.physicalVotesConfig.Insert;
@@ -51,18 +52,17 @@ public class Main {
 		}
 		LOG.info("Pagina de usuario");
 
-
 		return new ModelAndView("tipovotacion");
 		/*
-		if (fechaActual.compareTo(v.getDiaInicio()) < 0)
-			return new ModelAndView("tipovotacion");
-		else if (fechaActual.compareTo(v.getDiaInicio()) > 0)
-			// comprobar que esta dentro del plazo y si la opcion escogida es
-			// voto online
-			return new ModelAndView("formulario");
-		// else if(fechaActutal > getDiaFin()) que no deje hacer nada
-
-		return null; // devolver pagina de error cuando la tengamos*/
+		 * if (fechaActual.compareTo(v.getDiaInicio()) < 0) return new
+		 * ModelAndView("tipovotacion"); else if
+		 * (fechaActual.compareTo(v.getDiaInicio()) > 0) // comprobar que esta
+		 * dentro del plazo y si la opcion escogida es // voto online return new
+		 * ModelAndView("formulario"); // else if(fechaActutal > getDiaFin())
+		 * que no deje hacer nada
+		 * 
+		 * return null; // devolver pagina de error cuando la tengamos
+		 */
 
 	}
 
@@ -90,21 +90,47 @@ public class Main {
 	@RequestMapping("/typeVote")
 	public ModelAndView SetTypeVote() throws Exception {
 
-		//OBTENER LOS DATOS DEL FORMULARIO
-		
-		//EJEMPLO-----------------------------
+		// OBTENER LOS DATOS DEL FORMULARIO
+
+		// EJEMPLO-----------------------------
 		String NIF = "456";
 		String tipovoto = TipoVoto.FISICO.toString();
 		boolean estado = false;
 		Long idVotacion = new Long(1);
-		//------------------------------------
-		
-		
+		// ------------------------------------
 
 		Votante votante = new Votante(NIF, tipovoto, estado, idVotacion);
 
-		new InsertVirtualR(votante).setTypeVote(new InsertVirtualVotesP());;
-		
+		new InsertVirtualR(votante).setTypeVote(new InsertVirtualVotesP());
+		;
+
+		return new ModelAndView("exitoGuardarVotacion"); // ?????
+	}
+
+	@RequestMapping("/voto")
+	public ModelAndView GetVoteInfo() throws Exception {
+
+		// OBTENER LOS DATOS DEL FORMULARIO
+		// EJEMPLO-----------------------------
+		String tipoVoto = TipoVoto.FISICO.toString();
+		Long opcionEscogida = new Long(1);
+		int totalVotos = 4;
+		Long idVotacion = new Long(1);
+		String colegioElectoral = "cod1";
+		// ------------------------------------
+
+		Votos votos = new Votos(tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
+
+		// OBTENER LOS DATOS DEL FORMULARIO
+		// EJEMPLO-----------------------------
+		String NIF = "456";
+		String tipovoto = TipoVoto.FISICO.toString();
+		boolean estado = false;
+		// ------------------------------------
+
+		Votante votante = new Votante(NIF, tipovoto, estado, idVotacion);
+
+		new InsertVirtualR(votante, votos).setTypeVote(new InsertVirtualVotesP());
 		
 
 		return new ModelAndView("exitoGuardarVotacion"); // ?????
