@@ -182,30 +182,7 @@ public class ObjectDaoImpl implements ObjectDao{
 		
 		
 		return votaciones;
-	}
-
-	@Override
-	public void insert(Votante v) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Votante findVotante(String NIF) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Votante> findAllVotantes() {
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
 
 	@Override

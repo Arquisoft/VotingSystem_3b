@@ -10,10 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.uniovi.asw.model.TipoVoto;
 import es.uniovi.asw.model.Votacion;
+import es.uniovi.asw.model.VotacionForm;
 import es.uniovi.asw.model.Votante;
 import es.uniovi.asw.model.Votos;
 import es.uniovi.asw.physicalVotes.dBUpdate.InsertVotesP;
@@ -26,6 +29,7 @@ import es.uniovi.asw.virtualVotes.dBUpdate.InsertVirtualVotesP;
 import es.uniovi.asw.virtualVotes.virtualVotesConfig.InsertVirtualR;
 
 @Controller
+@SessionAttributes("vot")
 public class Main {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Main.class);
@@ -36,6 +40,8 @@ public class Main {
 
 	@RequestMapping("/")
 	public ModelAndView landing(Model model) {
+		VotacionForm n = new VotacionForm();
+		model.addAttribute("vot", n);
 		LOG.info("Landing page access");
 		return new ModelAndView("landing");
 
@@ -134,6 +140,22 @@ public class Main {
 		
 
 		return new ModelAndView("exitoGuardarVotacion"); // ?????
+	}
+	
+	@RequestMapping(value = "/guardarVotacion")
+	public String configVoto(VotacionForm vot, Model model) {
+		LOG.info("Add vote page access");
+		return "/guardarVotacion";
+	}
+
+	@RequestMapping(value = "/guardarVotacion", method = RequestMethod.POST)
+	public String guardarConfigVot(VotacionForm vot, Model model) {
+
+		if (vot != null)
+			return "/exitoGuardarVotacion";
+		else
+			return "/guardarVotacion";
+
 	}
 
 }

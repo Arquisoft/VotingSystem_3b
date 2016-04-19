@@ -29,13 +29,6 @@ public interface ObjectDao {
 	public Votacion findVotacion(Long id);
 	public List<Votacion> findAllVotaciones();
 	
-
-	// Votante
-	public void insert(Votante v);
-	public void delete();
-	public Votante findVotante(String NIF);
-	public List<Votante> findAllVotantes();
-
 	// Opcion
 	public void insertOpcion(Opcion o);
 	public void deleteOpcion();
