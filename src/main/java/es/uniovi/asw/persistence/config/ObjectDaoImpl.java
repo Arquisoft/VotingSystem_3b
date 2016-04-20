@@ -20,7 +20,29 @@ public class ObjectDaoImpl implements ObjectDao {
 
 	@Override
 	public void insertColegio(ColegioElectoral v) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("INSERT INTO COLEGIOELECTORAL(CODCOLEGIOELECTORAL, CIRCUNSCRIPCION,"
+					+ " CIUDAD, COMUNIDADAUTONOMA) VALUES (?, ?, ?, ?)");
+					
+			
+			ps.setString(1, v.getCodColegioElectoral());
+			ps.setString(2,v.getCircunscripcion());
+			ps.setString(3,v.getCiudad());
+			ps.setString(4,v.getComunidadAutonoma());
+
+			ps.executeUpdate();
+
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 
 	}
 
@@ -31,15 +53,74 @@ public class ObjectDaoImpl implements ObjectDao {
 	}
 
 	@Override
-	public Votante findColegio(String codigo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ColegioElectoral findColegio(String codigo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ColegioElectoral colegio = null;
+
+		try {
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("SELECT * FROM COLEGIOELECTORAL WHERE CODCOLEGIOELECTORAL = ?");
+			ps.setString(1, codigo);
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+
+				String circunscripcion = rs.getString(2);
+				String ciudad = rs.getString(3);
+				String comunidadAutonoma = rs.getString(4);
+
+				colegio = new ColegioElectoral(codigo, circunscripcion, ciudad, comunidadAutonoma);
+
+			}
+
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return colegio;
 	}
 
 	@Override
 	public List<ColegioElectoral> findAllColegios() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<ColegioElectoral> colegios = new ArrayList<>();
+
+		try {
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("SELECT * FROM COLEGIOELECTORAL");
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+
+				
+				//Long id = rs.getLong(1);
+				String codColegioElectoral = rs.getString(1);
+				String circunscripcion = rs.getString(2);
+				String ciudad = rs.getString(3);
+				String comunidadAutonoma = rs.getString(4);
+				ColegioElectoral col = new ColegioElectoral( codColegioElectoral, circunscripcion, ciudad, comunidadAutonoma);
+				
+				colegios.add(col);
+
+			}
+
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return colegios;
 	}
 
 	@Override

@@ -64,6 +64,16 @@ public class ColegioElectoral {
 		this.codColegioElectoral = codColegioElectoral
 				+ comunidadAutonoma.subSequence(0, 2);
 	}
+	
+	public ColegioElectoral(String codColegioElectoral, String circunscripcion, String ciudad,
+			String comunidadAutonoma) {
+		super();
+		this.codColegioElectoral = codColegioElectoral;
+		this.circunscripcion = circunscripcion;
+		this.ciudad = ciudad;
+		this.comunidadAutonoma = comunidadAutonoma;
+	
+	}
 
 	@Override
 	public String toString() {

@@ -17,7 +17,7 @@ public interface ObjectDao {
 
 	public void deleteColegio(String codigo);
 
-	public Votante findColegio(String codigo);
+	public ColegioElectoral findColegio(String codigo);
 
 	public List<ColegioElectoral> findAllColegios();
 
