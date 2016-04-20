@@ -5,4 +5,8 @@ package es.uniovi.asw.physicalVotes.reportWriter;
  */
 public class WreportP implements WriteReport {
 
+	public WreportP() {	}
+	
+	
+
 }

@@ -1,37 +1,34 @@
 package es.uniovi.asw.model;
 
-import java.util.Date;
-
-
 public class VotacionForm {
-	
-	private Date fechaInicio;
-	private Date fechaFin;
-	private String tipoVotacion;
-	
 
-	public VotacionForm() {	}
-	
-	public VotacionForm(Date fechaInicio, Date fechaFin, String tipoVot) {
+	private String fechaInicio;
+	private String fechaFin;
+	private String tipoVotacion;
+
+	public VotacionForm() {
+	}
+
+	public VotacionForm(String fechaInicio, String fechaFin, String tipoVot) {
 		super();
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.tipoVotacion = tipoVot;
 	}
 
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
@@ -43,5 +40,4 @@ public class VotacionForm {
 		this.tipoVotacion = tipoVotacion;
 	}
 
-	
 }

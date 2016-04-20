@@ -9,19 +9,7 @@ public class GetCI implements GetConfigInfo {
 	@Override
 	public void cargarDatos(String circunscripcion, String ciudad,
 			String comunidadAutonoma, String codColegioElectoral) {
-		
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

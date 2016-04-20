@@ -8,12 +8,12 @@
 	<form id="form_votacion" action="#" th:action="@{/guardarVotacion}" th:object="${vot}" method="post" >
 
 		<label for="diainicio">Dia inicio </label>
-		<input id="diainicio" type="date" th:field="*{fechaInicio}"/>
+		<input id="diainicio" type="text" th:field="*{fechaInicio}"/>
 	
 	
 	
 		<label for="diafin">Dia fin </label>
-		<input id="diafin" type="date" th:field="*{fechaFin}"/>
+		<input id="diafin" type="text" th:field="*{fechaFin}"/>
 	
 		<br />
 		<br />	

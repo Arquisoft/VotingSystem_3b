@@ -34,18 +34,16 @@ public class InsertVirtualR implements InsertVirtual {
 			database.insertar(votante);
 		}
 	}
-	
-	
+
 	@Override
 	public void getVoteInfo(InsertVirtualVotesP database) {
-		
-		//modificar votos
+
+		// modificar votos
 		database.insert(votos);
-		
-		//marcar al usuario como que ya votó
+
+		// marcar al usuario como que ya votó
 		database.setEstado(votante);
 	}
-
 
 	public Votante getVotante() {
 		return votante;
@@ -63,5 +61,4 @@ public class InsertVirtualR implements InsertVirtual {
 		this.votos = votos;
 	}
 
-	
 }

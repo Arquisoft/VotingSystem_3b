@@ -12,15 +12,15 @@ import es.uniovi.asw.model.Votacion;
 import es.uniovi.asw.persistence.config.ObjectDaoImpl;
 
 public class VotacionTest {
-	
+
 	ObjectDaoImpl dao = null;
-	
+
 	@Before
 	public void run() {
 		dao = new ObjectDaoImpl();
-		
+
 	}
-	
+
 	@After
 	public void finalize() {
 		dao.restoreDatabase();
@@ -28,16 +28,13 @@ public class VotacionTest {
 
 	@Test
 	public void test() {
-		
+
 		Votacion v = new Votacion(new Date(), new Date(), "Referendum");
-		
-	
-		
-		dao.insertVotacion(v);
+
+		dao.insertVotacion(v, null);
 		assertEquals(1, dao.findAllVotaciones().size());
-		assertEquals(v.getTipoVotacion(), dao.findVotacion(new Long(1)).getTipoVotacion());
+		assertEquals(v.getTipoVotacion(), dao.findVotacion(new Long(1))
+				.getTipoVotacion());
 	}
-	
-	
 
 }

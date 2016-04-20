@@ -16,9 +16,7 @@ public interface InsertVirtual {
 	public boolean setTypeVote(Votante v);
 
 	public boolean setEstado(Votante v);
-	
 
-	
 	public Votos findVotosById(Long id);
 
 	public boolean insert(Votos v);

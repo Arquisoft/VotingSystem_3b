@@ -5,4 +5,6 @@ package es.uniovi.asw.electors.reportWriter;
  */
 public interface WriteReport {
 
+	public void setLog(String datos);
+
 }

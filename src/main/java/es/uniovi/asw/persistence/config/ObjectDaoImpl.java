@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.uniovi.asw.electors.dbUpdate.WriteReport;
 import es.uniovi.asw.model.Censos;
 import es.uniovi.asw.model.ColegioElectoral;
 import es.uniovi.asw.model.Opcion;
@@ -15,18 +16,19 @@ import es.uniovi.asw.model.Votacion;
 import es.uniovi.asw.model.Votante;
 import es.uniovi.asw.model.Votos;
 
-public class ObjectDaoImpl implements ObjectDao{
+public class ObjectDaoImpl implements ObjectDao {
+
 
 	@Override
 	public void insertColegio(ColegioElectoral v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteColegio(String codigo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -44,13 +46,13 @@ public class ObjectDaoImpl implements ObjectDao{
 	@Override
 	public void insertCensos(Censos c) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteCensos(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -64,52 +66,52 @@ public class ObjectDaoImpl implements ObjectDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public void insertVotacion(Votacion v) {
+	public void insertVotacion(Votacion v, WriteReport r) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		
+
 		try {
-			
-			con=Jdbc.getConnection();
-			ps=con.prepareStatement("INSERT INTO VOTACION(DIAINICIO, DIAFIN,"
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("INSERT INTO VOTACION(DIAINICIO, DIAFIN,"
 					+ " TIPOVOTACION) VALUES(?, ?, ?)");
 			ps.setDate(1, new java.sql.Date(v.getDiaInicio().getTime()));
 			ps.setDate(2, new java.sql.Date(v.getDiaFin().getTime()));
 			ps.setString(3, v.getTipoVotacion());
-			
+
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public void deleteVotacion(Long id) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		
+
 		try {
-			
-			con=Jdbc.getConnection();
-			ps=con.prepareStatement("DELETE FROM VOTACION WHERE ID = ?");
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("DELETE FROM VOTACION WHERE ID = ?");
 			ps.setLong(1, id);
-			
+
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -119,31 +121,31 @@ public class ObjectDaoImpl implements ObjectDao{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Votacion vot = null;
-		
+
 		try {
-			
-			con=Jdbc.getConnection();
-			ps=con.prepareStatement("SELECT * FROM VOTACION WHERE ID = ?");
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("SELECT * FROM VOTACION WHERE ID = ?");
 			ps.setLong(1, id);
-			
+
 			rs = ps.executeQuery();
-			while(rs.next()){
-				
+			while (rs.next()) {
+
 				Date diaInicio = new Date(rs.getDate(2).getTime());
 				Date diaFinal = new Date(rs.getDate(3).getTime());
 				String tipoVotacion = rs.getString(4);
-				
+
 				vot = new Votacion(id, diaInicio, diaFinal, tipoVotacion);
-							
+
 			}
-			
+
 			ps.close();
 			con.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return vot;
 	}
 
@@ -154,47 +156,46 @@ public class ObjectDaoImpl implements ObjectDao{
 		ResultSet rs = null;
 		Votacion vot = null;
 		ArrayList<Votacion> votaciones = new ArrayList<>();
-		
+
 		try {
-			
-			con=Jdbc.getConnection();
-			ps=con.prepareStatement("SELECT * FROM VOTACION");
-			
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("SELECT * FROM VOTACION");
+
 			rs = ps.executeQuery();
-			while(rs.next()){
-				
+			while (rs.next()) {
+
 				Long id = rs.getLong(1);
 				Date diaInicio = new Date(rs.getDate(2).getTime());
 				Date diaFinal = new Date(rs.getDate(3).getTime());
 				String tipoVotacion = rs.getString(4);
-				
+
 				vot = new Votacion(id, diaInicio, diaFinal, tipoVotacion);
-				votaciones.add(vot);		
-				
+				votaciones.add(vot);
+
 			}
-			
+
 			ps.close();
 			con.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return votaciones;
-	
+
 	}
 
 	@Override
 	public void insertOpcion(Opcion o) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteOpcion() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -209,30 +210,6 @@ public class ObjectDaoImpl implements ObjectDao{
 		return null;
 	}
 
-	@Override
-	public void insertVotos(Votos v) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteVotos(Long opcionEscogida, Long idVotacion,
-			String colegioEletoral, String tipoVoto) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Votante findVotos(Long opcion) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Votos> findAllVotos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void restoreDatabase() {
@@ -251,8 +228,236 @@ public class ObjectDaoImpl implements ObjectDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	/*
+	 * Metodos de ceci
+	 */
+
+	@Override
+	public boolean insertVotante(Votante v) {
+		Connection c;
+		String error = "";
+
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+
+			PreparedStatement ps = c
+					.prepareStatement("INSERT INTO VOTANTE (NIF, TIPOVOTO, ESTADO, IDVOTACION) VALUES ( ?, ?, ?, ?)");
+
+			ps.setString(1, v.getNif());
+			ps.setString(2, v.getTipovoto());
+			ps.setBoolean(3, v.isEstado());
+			ps.setLong(4, v.getIdVotacion());
+			ps.execute();
+
+			ps.close();
+			c.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return false;
+		}
+
+		return true;
+
+	}
+
+	@Override
+	public boolean setTipoVoto(Votante v) {
+		Connection c;
+		String error = "";
+
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+			PreparedStatement ps = c
+					.prepareStatement("UPDATE VOTANTE SET TIPOVOTO=? WHERE NIF=?");
+
+			ps.setString(1, v.getTipovoto());
+			ps.setString(2, v.getNif());
+			ps.execute();
+
+			ps.close();
+			c.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean setEstadoVoto(Votante v) {
+		Connection c;
+		String error = "";
+
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+			PreparedStatement ps = c
+					.prepareStatement("UPDATE VOTANTE SET ESTADO=? WHERE NIF=?");
+
+			ps.setBoolean(1, v.isEstado());
+			ps.setString(2, v.getNif());
+			ps.execute();
+
+			ps.close();
+			c.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public Votante findVotante(String NIF) {
+		Connection c;
+		String error = "";
+		ResultSet rs;
+		Votante vot = null;
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+			PreparedStatement ps = c
+					.prepareStatement("SELECT * FROM VOTANTE WHERE NIF=?");
+
+			ps.setString(1, NIF);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				vot = new Votante();
+				vot.setNif(rs.getString(0));
+				vot.setTipovoto(rs.getString(1));
+				vot.setEstado(rs.getBoolean(2));
+				vot.setIdVotacion(rs.getLong(3));
+			}
+
+			ps.close();
+			c.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return vot;
+		}
+
+		return vot;
+	}
+
+	@Override
+	public Votos findVotos(Long id) {
+		Connection c;
+		String error = "";
+		ResultSet rs;
+		Votos vot = null;
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+			PreparedStatement ps = c
+					.prepareStatement("SELECT * FROM VOTOS WHERE ID=?");
+
+			ps.setLong(1, id);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				vot = new Votos();
+			}
+
+			ps.close();
+			c.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return vot;
+		}
+
+		return vot;
 	}
 
 
+	@Override
+	public boolean updateVotos(Votos v) {
+		Connection c;
+		String error = "";
+
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+			PreparedStatement ps = c
+					.prepareStatement("UPDATE VOTOS SET TOTALVOTOL=? WHERE ID=?");
+
+			ps.setInt(1, v.getTotalVotos());
+			ps.setLong(2, v.getId());
+			ps.execute();
+
+			ps.close();
+			c.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return false;
+		}
+
+		return true;
+	}
+	
+	@Override
+	public boolean insertVotos(Votos v) {
+		Connection c;
+		String error = "";
+
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+			PreparedStatement ps = c
+					.prepareStatement("INSERT INTO VOTOS(TIPOVOTO, OPCIONESCOGIDA, TOTALVOTOS, IDVOTACION, COLEGIOELECTORAL) VALUES ( ?, ?, ?, ?, ?)");
+
+			ps.setString(1, v.getTipoVoto());
+			ps.setLong(2, v.getOpcionEscogida());
+			ps.setInt(3, v.getTotalVotos());
+			ps.setLong(4, v.getIdVotacion());
+			ps.setString(5, v.getColegioElectoral());
+			ps.execute();
+
+			ps.close();
+			c.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return false;
+		}
+
+		return true;
+
+	}
 }

@@ -1,17 +1,16 @@
 package es.uniovi.asw.model;
 
-
-
 public class ColegioElectoral {
-	
+
 	private Long id;
-	
-	// Se considera que una circunscripción es el distrito electoral (barrio de la ciudad)
+
+	// Se considera que una circunscripción es el distrito electoral (barrio de
+	// la ciudad)
 	private String circunscripcion;
-	private String ciudad;	
+	private String ciudad;
 	private String comunidadAutonoma;
 	private String codColegioElectoral;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -43,8 +42,7 @@ public class ColegioElectoral {
 	public void setComunidadAutonoma(String comunidadAutonoma) {
 		this.comunidadAutonoma = comunidadAutonoma;
 	}
-	
-	
+
 	public String getCodColegioElectoral() {
 		return codColegioElectoral;
 	}
@@ -53,7 +51,8 @@ public class ColegioElectoral {
 		this.codColegioElectoral = codColegioElectoral;
 	}
 
-	public ColegioElectoral(){	}
+	public ColegioElectoral() {
+	}
 
 	public ColegioElectoral(Long id, String circunscripcion, String ciudad,
 			String comunidadAutonoma, String codColegioElectoral) {
@@ -62,7 +61,8 @@ public class ColegioElectoral {
 		this.circunscripcion = circunscripcion;
 		this.ciudad = ciudad;
 		this.comunidadAutonoma = comunidadAutonoma;
-		this.codColegioElectoral = codColegioElectoral + comunidadAutonoma.subSequence(0, 2);
+		this.codColegioElectoral = codColegioElectoral
+				+ comunidadAutonoma.subSequence(0, 2);
 	}
 
 	@Override
@@ -72,12 +72,5 @@ public class ColegioElectoral {
 				+ ", comunidadAutonoma=" + comunidadAutonoma
 				+ ", codColegioElectoral=" + codColegioElectoral + "]";
 	}
-	
-	
-	
 
-	
-	
-		
-	
 }

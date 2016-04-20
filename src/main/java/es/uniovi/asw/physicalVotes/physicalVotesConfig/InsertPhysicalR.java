@@ -39,12 +39,14 @@ public class InsertPhysicalR implements Insert {
 				System.out.print(voto + "\t");
 			}
 
-			votos = new Votos(entry.getValue().get(0), (long) Double.parseDouble(entry.getValue().get(1)),
+			votos = new Votos(entry.getValue().get(0),
+					(long) Double.parseDouble(entry.getValue().get(1)),
 					(int) Double.parseDouble(entry.getValue().get(2)),
-					(long) Double.parseDouble(entry.getValue().get(3)), entry.getValue().get(4).toString());
+					(long) Double.parseDouble(entry.getValue().get(3)), entry
+							.getValue().get(4).toString());
 
 			boolean e = database.insertar(votos);
-			if(!e)
+			if (!e)
 				exito = false;
 			System.out.println();
 		}

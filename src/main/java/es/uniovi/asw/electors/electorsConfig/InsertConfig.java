@@ -7,8 +7,7 @@ import es.uniovi.asw.electors.dbUpdate.ConfigP;
  * datos en la base de datos.
  */
 public interface InsertConfig {
-	
+
 	public void addVotacion(ConfigP database);
-	
-	
+
 }

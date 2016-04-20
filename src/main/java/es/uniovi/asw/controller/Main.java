@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.uniovi.asw.electors.dbUpdate.ConfigP;
+import es.uniovi.asw.electors.electorsConfig.ConfigR;
 import es.uniovi.asw.model.TipoVoto;
 import es.uniovi.asw.model.Votacion;
 import es.uniovi.asw.model.VotacionForm;
@@ -51,8 +53,8 @@ public class Main {
 	public ModelAndView Usuarios() {
 		try {
 			// ESTO ES PARA PROBAR, EN REALIDAD SE SACARIA DE LA BASE DE DATOS
-			v.setDiaInicio(new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US)
-					.parse("Sun Apr 17 20:12:22 CEST 2016"));
+			v.setDiaInicio(new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",
+					Locale.US).parse("Sun Apr 17 20:12:22 CEST 2016"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -82,14 +84,17 @@ public class Main {
 	@RequestMapping("/physical")
 	public ModelAndView cargarVotosFisicos() {
 		WreportR report1 = new WreportR(new WreportP());
-		Insert r1 = new InsertPhysicalR(new RVotes(), "src/test/resources/votacionesFisicas.xlsx");
+		Insert r1 = new InsertPhysicalR(new RVotes(),
+				"src/test/resources/votacionesFisicas.xlsx");
 		boolean exito = r1.addVoto(new InsertVotesP(report1));
 
 		if (exito)
-			return new ModelAndView("physical").addObject("resultado",
-					"Se han almacenado todos los datos con éxito en la base de datos.");
+			return new ModelAndView("physical")
+					.addObject("resultado",
+							"Se han almacenado todos los datos con éxito en la base de datos.");
 		else
-			return new ModelAndView("physical").addObject("resultado", "No se han podido almacenar todos los datos.");
+			return new ModelAndView("physical").addObject("resultado",
+					"No se han podido almacenar todos los datos.");
 
 	}
 
@@ -125,7 +130,8 @@ public class Main {
 		String colegioElectoral = "cod1";
 		// ------------------------------------
 
-		Votos votos = new Votos(tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
+		Votos votos = new Votos(tipoVoto, opcionEscogida, totalVotos,
+				idVotacion, colegioElectoral);
 
 		// OBTENER LOS DATOS DEL FORMULARIO
 		// EJEMPLO-----------------------------
@@ -136,12 +142,12 @@ public class Main {
 
 		Votante votante = new Votante(NIF, tipovoto, estado, idVotacion);
 
-		new InsertVirtualR(votante, votos).setTypeVote(new InsertVirtualVotesP());
-		
+		new InsertVirtualR(votante, votos)
+				.setTypeVote(new InsertVirtualVotesP());
 
 		return new ModelAndView("exitoGuardarVotacion"); // ?????
 	}
-	
+
 	@RequestMapping(value = "/guardarVotacion")
 	public String configVoto(VotacionForm vot, Model model) {
 		LOG.info("Add vote page access");
@@ -151,10 +157,32 @@ public class Main {
 	@RequestMapping(value = "/guardarVotacion", method = RequestMethod.POST)
 	public String guardarConfigVot(VotacionForm vot, Model model) {
 
-		if (vot != null)
-			return "/exitoGuardarVotacion";
-		else
-			return "/guardarVotacion";
+		if (vot != null) {
+			
+			if (vot.getFechaInicio() == null 
+					|| vot.getFechaInicio().isEmpty()
+					|| vot.getFechaFin() == null
+					|| vot.getFechaFin().isEmpty()
+					|| vot.getTipoVotacion() == null 
+					|| vot.getTipoVotacion().isEmpty()){
+
+				return "/error";
+
+			}else{	
+			
+				VotacionForm votacion = new VotacionForm(vot.getFechaInicio(),
+						vot.getFechaFin(), vot.getTipoVotacion());
+
+				new ConfigR(votacion)
+						.addVotacion(new ConfigP(
+								new es.uniovi.asw.electors.dbUpdate.WreportR(
+						  new es.uniovi.asw.electors.reportWriter.WreportP())));
+
+				return "/exitoGuardarVotacion";
+			}
+		} else {
+			return "/error";
+		}
 
 	}
 
