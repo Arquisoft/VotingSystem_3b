@@ -22,5 +22,7 @@ public interface InsertVirtual {
 	public boolean insert(Votos v);
 
 	public boolean update(Votos v);
+	
+	public Votos findVoto(Votos votos);
 
 }

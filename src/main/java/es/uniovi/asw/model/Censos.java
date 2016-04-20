@@ -8,6 +8,17 @@ public class Censos {
 	private int cofColegioElectoral;
 	private String password;
 
+	
+	
+	public Censos(String nombre, String nif, String email, int cofColegioElectoral, String password) {
+		super();
+		this.nombre = nombre;
+		this.nif = nif;
+		this.email = email;
+		this.cofColegioElectoral = cofColegioElectoral;
+		this.password = password;
+	}
+
 	public int getId() {
 		return id;
 	}

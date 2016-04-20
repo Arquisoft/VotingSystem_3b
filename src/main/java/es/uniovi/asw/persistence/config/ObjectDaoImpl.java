@@ -18,7 +18,6 @@ import es.uniovi.asw.model.Votos;
 
 public class ObjectDaoImpl implements ObjectDao {
 
-
 	@Override
 	public void insertColegio(ColegioElectoral v) {
 		// TODO Auto-generated method stub
@@ -62,11 +61,43 @@ public class ObjectDaoImpl implements ObjectDao {
 	}
 
 	@Override
+	public Censos findCensosByNif(String nif) {
+		Connection c;
+		PreparedStatement ps;
+		Censos v = null;
+		ResultSet rs = null;
+		
+		try {
+			c = Jdbc.getConnection();
+			ps = c.prepareStatement("SELECT * FROM CENSOS WHERE NIF = ?");
+			ps.setString(1, nif);
+			
+			rs = ps.executeQuery();
+			
+
+			if (rs.next()) {
+				v = new Censos(rs.getString(2), rs.getString(3), rs.getString(4), Integer.parseInt(rs.getString(5)), rs.getString(6));
+			}
+			
+			
+			ps.close();
+			rs.close();
+			c.close();
+			
+		} catch (SQLException e) {
+			System.out.println("ERROR al buscar el votante con NIF " + nif );
+		}
+		
+		return v;
+		
+	}
+
+	@Override
 	public List<Censos> findAllCensos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public void insertVotacion(Votacion v, WriteReport r) {
 		Connection con = null;
@@ -75,8 +106,7 @@ public class ObjectDaoImpl implements ObjectDao {
 		try {
 
 			con = Jdbc.getConnection();
-			ps = con.prepareStatement("INSERT INTO VOTACION(DIAINICIO, DIAFIN,"
-					+ " TIPOVOTACION) VALUES(?, ?, ?)");
+			ps = con.prepareStatement("INSERT INTO VOTACION(DIAINICIO, DIAFIN," + " TIPOVOTACION) VALUES(?, ?, ?)");
 			ps.setDate(1, new java.sql.Date(v.getDiaInicio().getTime()));
 			ps.setDate(2, new java.sql.Date(v.getDiaFin().getTime()));
 			ps.setString(3, v.getTipoVotacion());
@@ -262,7 +292,6 @@ public class ObjectDaoImpl implements ObjectDao {
 		return opciones;
 	}
 
-
 	@Override
 	public void restoreDatabase() {
 		try {
@@ -328,11 +357,11 @@ public class ObjectDaoImpl implements ObjectDao {
 		// if(reportR.validarVotante(v)){
 		try {
 			c = Jdbc.getConnection();
-			PreparedStatement ps = c
-					.prepareStatement("UPDATE VOTANTE SET TIPOVOTO=? WHERE NIF=?");
+			PreparedStatement ps = c.prepareStatement("UPDATE VOTANTE SET TIPOVOTO=?, ESTADO=? WHERE NIF=?");
 
 			ps.setString(1, v.getTipovoto());
-			ps.setString(2, v.getNif());
+			ps.setBoolean(2, v.isEstado());
+			ps.setString(3, v.getNif());
 			ps.execute();
 
 			ps.close();
@@ -357,8 +386,7 @@ public class ObjectDaoImpl implements ObjectDao {
 		// if(reportR.validarVotante(v)){
 		try {
 			c = Jdbc.getConnection();
-			PreparedStatement ps = c
-					.prepareStatement("UPDATE VOTANTE SET ESTADO=? WHERE NIF=?");
+			PreparedStatement ps = c.prepareStatement("UPDATE VOTANTE SET ESTADO=? WHERE NIF=?");
 
 			ps.setBoolean(1, v.isEstado());
 			ps.setString(2, v.getNif());
@@ -387,18 +415,17 @@ public class ObjectDaoImpl implements ObjectDao {
 		// if(reportR.validarVotante(v)){
 		try {
 			c = Jdbc.getConnection();
-			PreparedStatement ps = c
-					.prepareStatement("SELECT * FROM VOTANTE WHERE NIF=?");
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM VOTANTE WHERE NIF=?");
 
 			ps.setString(1, NIF);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				vot = new Votante();
-				vot.setNif(rs.getString(0));
-				vot.setTipovoto(rs.getString(1));
-				vot.setEstado(rs.getBoolean(2));
-				vot.setIdVotacion(rs.getLong(3));
+				vot.setNif(rs.getString(1));
+				vot.setTipovoto(rs.getString(2));
+				vot.setEstado(rs.getBoolean(3));
+				vot.setIdVotacion(rs.getLong(4));
 			}
 
 			ps.close();
@@ -425,23 +452,21 @@ public class ObjectDaoImpl implements ObjectDao {
 		// if(reportR.validarVotante(v)){
 		try {
 			c = Jdbc.getConnection();
-			PreparedStatement ps = c
-					.prepareStatement("SELECT * FROM VOTOS WHERE ID=?");
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM VOTOS WHERE ID=?");
 
 			ps.setLong(1, id);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				
+
 				Long idC = rs.getLong(1);
 				String tipoVoto = rs.getString(2);
 				Long opcionEscogida = rs.getLong(3);
 				int totalVotos = rs.getInt(4);
 				Long idVotacion = rs.getLong(5);
 				String colegioElectoral = rs.getString(6);
-				
-				vot = new Votos(idC, tipoVoto, opcionEscogida, totalVotos,
-												  idVotacion, colegioElectoral);
+
+				vot = new Votos(idC, tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
 			}
 
 			ps.close();
@@ -458,7 +483,7 @@ public class ObjectDaoImpl implements ObjectDao {
 
 		return vot;
 	}
-	
+
 	@Override
 	public List<Votos> findAllVotos() {
 		Connection con = null;
@@ -474,7 +499,6 @@ public class ObjectDaoImpl implements ObjectDao {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 
-				
 				Long id = rs.getLong(1);
 				String tipoVoto = rs.getString(2);
 				Long opcionEscogida = rs.getLong(3);
@@ -482,7 +506,7 @@ public class ObjectDaoImpl implements ObjectDao {
 				Long idVotacion = rs.getLong(5);
 				String colegioElectoral = rs.getString(6);
 				Votos v = new Votos(id, tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
-				
+
 				votos.add(v);
 
 			}
@@ -497,7 +521,6 @@ public class ObjectDaoImpl implements ObjectDao {
 		return votos;
 	}
 
-
 	@Override
 	public boolean updateVotos(Votos v) {
 		Connection c;
@@ -506,8 +529,7 @@ public class ObjectDaoImpl implements ObjectDao {
 		// if(reportR.validarVotante(v)){
 		try {
 			c = Jdbc.getConnection();
-			PreparedStatement ps = c
-					.prepareStatement("UPDATE VOTOS SET TOTALVOTOL=? WHERE ID=?");
+			PreparedStatement ps = c.prepareStatement("UPDATE VOTOS SET TOTALVOTOS=? WHERE ID=?");
 
 			ps.setInt(1, v.getTotalVotos());
 			ps.setLong(2, v.getId());
@@ -526,7 +548,7 @@ public class ObjectDaoImpl implements ObjectDao {
 
 		return true;
 	}
-	
+
 	@Override
 	public boolean insertVotos(Votos v) {
 		Connection c;
@@ -535,8 +557,8 @@ public class ObjectDaoImpl implements ObjectDao {
 		// if(reportR.validarVotante(v)){
 		try {
 			c = Jdbc.getConnection();
-			PreparedStatement ps = c
-					.prepareStatement("INSERT INTO VOTOS(TIPOVOTO, OPCIONESCOGIDA, TOTALVOTOS, IDVOTACION, COLEGIOELECTORAL) VALUES ( ?, ?, ?, ?, ?)");
+			PreparedStatement ps = c.prepareStatement(
+					"INSERT INTO VOTOS(TIPOVOTO, OPCIONESCOGIDA, TOTALVOTOS, IDVOTACION, COLEGIOELECTORAL) VALUES ( ?, ?, ?, ?, ?)");
 
 			ps.setString(1, v.getTipoVoto());
 			ps.setLong(2, v.getOpcionEscogida());
@@ -560,5 +582,48 @@ public class ObjectDaoImpl implements ObjectDao {
 
 	}
 
-	
+	public Votos findVoto(Votos votos) {
+		Connection c;
+		String error = "";
+		ResultSet rs;
+		Votos vot = null;
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM VOTOS WHERE TIPOVOTO=? and OPCIONESCOGIDA=? and IDVOTACION=? and COLEGIOELECTORAL=?");
+
+			ps.setString(1, votos.getTipoVoto());
+			ps.setLong(2, votos.getOpcionEscogida());
+			ps.setLong(3, votos.getIdVotacion());
+			ps.setString(4, votos.getColegioElectoral());
+			
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+
+				Long idC = rs.getLong(1);
+				String tipoVoto = rs.getString(2);
+				Long opcionEscogida = rs.getLong(3);
+				int totalVotos = rs.getInt(4);
+				Long idVotacion = rs.getLong(5);
+				String colegioElectoral = rs.getString(6);
+
+				vot = new Votos(idC, tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
+			}
+
+			ps.close();
+			c.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			error = "El voto no se ha podido cargar correctamente en la base de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+			return vot;
+		}
+
+		return vot;
+	}
+
 }

@@ -84,6 +84,35 @@ public class Main {
 		 */
 
 	}
+	
+	@RequestMapping("/usertipo")
+	public ModelAndView UsuariosTipo(Model model) {
+		try {
+			// ESTO ES PARA PROBAR, EN REALIDAD SE SACARIA DE LA BASE DE DATOS
+			v.setDiaInicio(new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",
+					Locale.US).parse("Sun Apr 17 20:12:22 CEST 2016"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		LOG.info("Pagina de usuario");
+		
+		TipoVotoForm tipo = new TipoVotoForm();
+		model.addAttribute("voto", tipo);
+		
+		return new ModelAndView("tipovotacion");
+		
+		/*
+		 * if (fechaActual.compareTo(v.getDiaInicio()) < 0) return new
+		 * ModelAndView("tipovotacion"); else if
+		 * (fechaActual.compareTo(v.getDiaInicio()) > 0) // comprobar que esta
+		 * dentro del plazo y si la opcion escogida es // voto online return new
+		 * ModelAndView("formulario"); // else if(fechaActutal > getDiaFin())
+		 * que no deje hacer nada
+		 * 
+		 * return null; // devolver pagina de error cuando la tengamos
+		 */
+
+	}
 
 	@RequestMapping("/admin")
 	public ModelAndView Admin() {
