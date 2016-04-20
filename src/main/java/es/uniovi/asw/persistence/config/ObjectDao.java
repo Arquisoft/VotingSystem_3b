@@ -28,6 +28,8 @@ public interface ObjectDao {
 
 	public Votante findCensos(int id);
 
+	public Censos findCensosByNif(String nif);
+
 	public List<Censos> findAllCensos();
 
 	// Votacion

@@ -14,14 +14,14 @@
 	
 	<form id="form_votacion" action="#" th:action="@{/guardarVoto}"
 		th:object="${votacion}" method="post">
+		
+		<label for="nif">NIF: </label>
+		<input id="nif" type="text" th:field="*{nif}" />
+		
 
-		<label for="opciones">Opciones:</label> <select>
-			<!-- Iterate on ${opciones} -->
-			<option>Candidato1</option>
-			<option>Candidato2</option>
-			<option>Blanco</option>
-			<option>Nulo</option>
-		</select>
+
+		<label for="opcion">Opcion </label>
+		<input id="opcion" type="text" th:field="*{opcion}" />
 		
 		<button type="submit">Enviar</button>
 

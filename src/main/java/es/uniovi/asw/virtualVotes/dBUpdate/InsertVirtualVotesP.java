@@ -1,5 +1,6 @@
 package es.uniovi.asw.virtualVotes.dBUpdate;
 
+import es.uniovi.asw.model.Censos;
 import es.uniovi.asw.model.Votante;
 import es.uniovi.asw.model.Votos;
 import es.uniovi.asw.persistence.config.ObjectDaoImpl;
@@ -43,6 +44,14 @@ public class InsertVirtualVotesP implements InsertVirtual {
 	@Override
 	public boolean update(Votos v) {
 		return new ObjectDaoImpl().updateVotos(v);
+	}
+
+	public Censos findCensoByNif(String nif) {
+		return new ObjectDaoImpl().findCensosByNif(nif);
+	}
+
+	public Votos findVoto(Votos votos) {
+		return new ObjectDaoImpl().findVoto(votos);
 	}
 
 	/*

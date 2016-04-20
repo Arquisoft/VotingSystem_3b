@@ -1,5 +1,6 @@
 package es.uniovi.asw.virtualVotes.virtualVotesConfig;
 
+import es.uniovi.asw.model.Censos;
 import es.uniovi.asw.model.Votante;
 import es.uniovi.asw.model.Votos;
 import es.uniovi.asw.virtualVotes.dBUpdate.InsertVirtualVotesP;
@@ -44,6 +45,8 @@ public class InsertVirtualR implements InsertVirtual {
 		// marcar al usuario como que ya votó
 		database.setEstado(votante);
 	}
+	
+	
 
 	public Votante getVotante() {
 		return votante;
@@ -59,6 +62,28 @@ public class InsertVirtualR implements InsertVirtual {
 
 	public void setVotos(Votos votos) {
 		this.votos = votos;
+	}
+
+	@Override
+	public Censos getCenso(InsertVirtualVotesP database) {
+		return database.findCensoByNif(votante.getNif());
+	}
+
+	@Override
+	public void setVote(InsertVirtualVotesP database) {
+		Votos v = database.findVoto(votos);
+		if(v != null){
+			v.setTotalVotos(v.getTotalVotos()+1);
+			database.update(v);
+		}else{
+			votos.setTotalVotos(1);
+			database.insert(votos);
+		}
+	}
+
+	@Override
+	public Votante getTipoVoto(InsertVirtualVotesP database) {
+		return database.findVotanteByNIF(votante.getNif());
 	}
 
 }

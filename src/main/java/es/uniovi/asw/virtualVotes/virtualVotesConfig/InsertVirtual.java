@@ -1,5 +1,7 @@
 package es.uniovi.asw.virtualVotes.virtualVotesConfig;
 
+import es.uniovi.asw.model.Censos;
+import es.uniovi.asw.model.Votante;
 import es.uniovi.asw.virtualVotes.dBUpdate.InsertVirtualVotesP;
 
 /*
@@ -11,5 +13,13 @@ public interface InsertVirtual {
 	public void setTypeVote(InsertVirtualVotesP database);
 
 	public void getVoteInfo(InsertVirtualVotesP database);
+	
+	public void setVote(InsertVirtualVotesP database);
+
+	public Censos getCenso(InsertVirtualVotesP database);
+
+	public Votante getTipoVoto(InsertVirtualVotesP insertVirtualVotesP);
+	
+	
 
 }

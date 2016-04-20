@@ -23,7 +23,7 @@ public class VotanteController {
 		
 		if (voto != null) {
 			//Datos del usuario
-			String NIF = "123";
+			String NIF = voto.getNif();
 			boolean estado = false;
 			Long idVotacion = new Long(1);
 			//Datos del tipo de voto

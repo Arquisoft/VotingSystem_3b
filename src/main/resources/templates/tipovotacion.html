@@ -13,6 +13,10 @@
 
    	 <form id="form_votacion" action="#" th:action="@{/typeVote}" th:object="${voto}" method="post" >
 
+		<label for="nif">NIF: </label>
+		<input id="nif" type="text" th:field="*{nif}" />
+		
+
 		<label for="tipoVoto">Tipo voto: </label>
 		<input id="tipoVoto" type="text" th:field="*{tipoVoto}"/>
 	

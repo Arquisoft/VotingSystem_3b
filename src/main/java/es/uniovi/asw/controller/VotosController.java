@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import es.uniovi.asw.model.Censos;
 import es.uniovi.asw.model.TipoVoto;
 import es.uniovi.asw.model.Votante;
 import es.uniovi.asw.model.VotoForm;
 import es.uniovi.asw.model.Votos;
 import es.uniovi.asw.virtualVotes.dBUpdate.InsertVirtualVotesP;
+import es.uniovi.asw.virtualVotes.virtualVotesConfig.InsertVirtual;
 import es.uniovi.asw.virtualVotes.virtualVotesConfig.InsertVirtualR;
 
 @Controller
@@ -24,36 +26,40 @@ public class VotosController {
 
 		if (votacion != null) {
 			// OBTENER LOS DATOS DEL FORMULARIO
-			System.out.println("OPCION : " + votacion.getOpcion());
-			
-			
-			
-			
-
-			// EJEMPLO-----------------------------
-			String tipoVoto = TipoVoto.FISICO.toString();
-			Long opcionEscogida = new Long(1);
-			int totalVotos = 4;
 			Long idVotacion = new Long(1);
-			String colegioElectoral = "12";
-			// ------------------------------------
 
-			Votos votos = new Votos(tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
-
-			// OBTENER LOS DATOS DEL FORMULARIO
-			// EJEMPLO-----------------------------
-			String NIF = "456";
+			// DATOS VOTANTE
+			String NIF = votacion.getNif();
 			String tipovoto = TipoVoto.WEB.toString();
-			boolean estado = false;
-			// ------------------------------------
+			boolean estado = true;
 			Votante votante = new Votante(NIF, tipovoto, estado, idVotacion);
 
-			new InsertVirtualR(votante, votos).setTypeVote(new InsertVirtualVotesP());
+			//Comprobamos que el usuario puede votar
+			InsertVirtual ins = new InsertVirtualR(votante);
+			Votante vot = ins.getTipoVoto(new InsertVirtualVotesP());
 
-			return "exitoGuardarVotacion"; // ?????
-		} else {
-			return "/error";
+			if (vot != null && !vot.isEstado() && vot.getTipovoto().equals(TipoVoto.WEB.toString())) {
+				// Obtenemos el censo del votante
+				Censos censo = ins.getCenso(new InsertVirtualVotesP());
+
+				// Datos de la votacion
+				String tipoVoto = TipoVoto.WEB.toString();
+				Long opcionEscogida = (long) (Double.parseDouble(votacion.getOpcion()));
+				String colegioElectoral = String.valueOf(censo.getCofColegioElectoral());
+
+				int totalVotos = 4;
+				Votos votos = new Votos(tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
+
+				// Marcamos que el votante ya realizó su voto
+				ins = new InsertVirtualR(votante, votos);
+				ins.setTypeVote(new InsertVirtualVotesP());
+				ins.setVote(new InsertVirtualVotesP());
+
+				return "exitoGuardarVotacion"; // ?????
+			}
 		}
+		return "/error";
+
 	}
 
 }
