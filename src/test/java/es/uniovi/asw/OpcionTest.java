@@ -28,10 +28,11 @@ public class OpcionTest {
 	public void testDB() {
 		dao.restoreDatabase();
 		
-		assertEquals(1, dao.findAllOpciones().size());
-		dao.insertOpcion(new Opcion(new Long(2), "Opcion 2", new Long(1)));
-		assertEquals(2, dao.findAllOpciones().size());
-		
+		assertEquals(3, dao.findAllOpciones().size()); //3 opciones del script
+		dao.insertOpcion(new Opcion(new Long(4), "Opcion 2", new Long(1)));
+		assertEquals(4, dao.findAllOpciones().size());
+		dao.deleteOpcion(new Long(4));
+		assertEquals(3, dao.findAllOpciones().size());
 	}
 
 }

@@ -249,8 +249,23 @@ public class ObjectDaoImpl implements ObjectDao {
 	}
 
 	@Override
-	public void deleteOpcion() {
-		// TODO Auto-generated method stub
+	public void deleteOpcion(Long id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("DELETE FROM OPCION WHERE ID = ?");
+			ps.setLong(1, id);
+			ps.executeUpdate();
+
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
