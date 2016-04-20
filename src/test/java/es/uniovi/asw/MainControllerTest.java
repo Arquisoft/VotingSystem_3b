@@ -47,5 +47,26 @@ public class MainControllerTest {
 				.andExpect(content().string(containsString("Configuración de la votación")));
 
 	}
+	
+	@Test
+	public void testUser() throws Exception {
+		mvc.perform(get("/user")).andExpect(status().isOk())
+				.andExpect(content().string(containsString("Pagina Usuario")));
+
+	}
+	
+	@Test
+	public void testFormulario() throws Exception {
+		mvc.perform(get("/formulario")).andExpect(status().isOk())
+				.andExpect(content().string(containsString("FORMULARIO DE")));
+
+	}
+	
+	@Test
+	public void testUserTipo() throws Exception {
+		mvc.perform(get("/usertipo")).andExpect(status().isOk())
+				.andExpect(content().string(containsString("ELEGIR TIPO DE")));
+
+	}
 
 }
