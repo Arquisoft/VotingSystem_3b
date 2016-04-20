@@ -1,46 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head">
+
+</head>
 <body>
-	<div th:replace="fragments/header :: cabecera">
-	</div>
+	<div th:replace="fragments/header :: cabecera"></div>
 
 	<div class="form-group">
 		<form action="/user" method="post" class="form-horizontal">
-			<button type="submit" class="btn btn-primary">Pagina
-				votacion usuario</button>
+			<button type="submit" class="btn btn-primary">Pagina votacion usuario</button>
 		</form>
-		
-		<br/>
-		
-		
-		<form action="/usertipo" method="post" class="form-horizontal">
-			<button type="submit" class="btn btn-primary">Pagina
-				votacion usuario Tipo</button>
-		</form>
-		
-		<br/>
-		
-		
-		
-		
+
+		<br />
+
 		<form action="/admin" method="post" class="form-horizontal">
 			<button type="submit" class="btn btn-primary">Pagina admin</button>
 		</form>
+
 		
-		<br/>
-		
-		<form action="/physical" method="post" class="form-horizontal">
-			<button type="submit" class="btn btn-primary">Cargar votos fisicos</button>
-		</form>
-		
-		<br/>
-		
-		<form action="/edit" method="post" class="form-horizontal">
-			<button type="submit" class="btn btn-primary">Pagina EDIT</button>
-		</form>
-		
-		<br/>
 	</div>
 
 </body>

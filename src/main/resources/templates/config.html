@@ -5,9 +5,9 @@
 	<link href="../static/css/voting.css"
           th:href="@{/css/voting.css}"
           rel="stylesheet" />
-	<h1>Voting System - Configuración de la votación</h1>
 </head>
 <body>
+	<h1>Voting System - Configuración de la votación</h1>
 
 	<form id="form_votacion" action="#" th:action="@{/guardarVotacion}" th:object="${vot}" method="post" >
 
@@ -28,6 +28,16 @@
 		<button type="submit">Enviar</button>
 
 	</form>
+	
+	<br/>
+	<br/>
+	<br/>
+	
+	<form action="/physical" method="post" class="form-horizontal">
+			<button type="submit" class="btn btn-primary">Cargar votos
+				fisicos</button>
+		</form>
+	
 
 
 </body>

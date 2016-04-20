@@ -6,8 +6,15 @@
 	rel="stylesheet" />
 </head>
 <body>
-	<p>
-		¡Felicidades, su la configuración de la votación ha sido guardada correctamente!
-	</p>    	
+	<div class="header" th:fragment="cabecera">
+		<h1>Voting System</h1>
+		<h2>
+			<span th:text="${resultado}"></span>
+		</h2>
+		
+		<form action="/" method="post" class="form-horizontal">
+			<button type="submit" class="btn btn-primary">Inicio</button>
+		</form>
+	</div>
 </body>
 </html>

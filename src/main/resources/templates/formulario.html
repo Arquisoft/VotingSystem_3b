@@ -7,11 +7,9 @@
 </head>
 <body>
 	<div class="header" th:fragment="cabecera">
-		<h1>Voting System</h1>
-		<h2>FORMULARIO DE VOTACIÓN</h2>
+		<h1>Voting System - FORMULARIO DE VOTACIÓN</h1>
 	</div>
 
-	
 	<form id="form_votacion" action="#" th:action="@{/guardarVoto}"
 		th:object="${votacion}" method="post">
 		
@@ -19,22 +17,12 @@
 		<input id="nif" type="text" th:field="*{nif}" />
 		
 
-
 		<label for="opcion">Opcion </label>
 		<input id="opcion" type="text" th:field="*{opcion}" />
 		
 		<button type="submit">Enviar</button>
 
 	</form>
-
-
-
-
-
-
-
-
-
 
 
 </body>

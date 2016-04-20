@@ -54,10 +54,12 @@ public class VotosController {
 				ins = new InsertVirtualR(votante, votos);
 				ins.setTypeVote(new InsertVirtualVotesP());
 				ins.setVote(new InsertVirtualVotesP());
-
+				
+				model.addAttribute("resultado", "Su voto se ha realizado correctamente.");
 				return "exitoGuardarVotacion"; // ?????
 			}
 		}
+		model.addAttribute("resultado", "Su voto no se ha podido realizar, pruebe otra vez.");
 		return "/error";
 
 	}

@@ -27,23 +27,27 @@ public class VotanteController {
 			boolean estado = false;
 			Long idVotacion = new Long(1);
 			//Datos del tipo de voto
-			String tipovoto;
+			String tipovoto = "";
 			if(voto.getTipoVoto().equals("WEB")){
 				tipovoto = TipoVoto.WEB.toString();
-			}else{
+			}else if(voto.getTipoVoto().equals("FISICO")){
 				tipovoto = TipoVoto.FISICO.toString();
 			}
 			
-			if(tipovoto == null)	//Si el tipo de voto se introduce mal vamos a la página de error
+			if(tipovoto.equals("")){	//Si el tipo de voto se introduce mal vamos a la página de error
+				model.addAttribute("resultado", "El tipo de voto no es correcto.");
 				return "/error";
+			}
 			
 			//Creamos el nuevo votante
 			Votante votante = new Votante(NIF, tipovoto, estado, idVotacion);
 			//Introducimos los datos en la base de datos
 			new InsertVirtualR(votante).setTypeVote(new InsertVirtualVotesP());
 			
+			model.addAttribute("resultado", "Su tipo de voto se ha modificado correctamente, ahora podrá votar de forma: " + votante.getTipovoto());
 			return "/exitoGuardarVotacion";
 		} else {
+			model.addAttribute("resultado", "No se ha podido modificar el tipo de voto.");
 			return "/error";
 		}
 	}
