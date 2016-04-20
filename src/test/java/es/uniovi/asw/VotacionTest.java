@@ -50,7 +50,7 @@ public class VotacionTest {
 	
 	// Votación sin fecha final
 	
-	@Test(expected = Exception.class)
+	@Test(expected = NullPointerException.class)
 	public void test3(){
 		
 		Votacion v = new Votacion(new Date(), null, "Referendum");
