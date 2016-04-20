@@ -36,7 +36,7 @@ public class WreportR implements es.uniovi.asw.electors.dbUpdate.WriteReport{
 				datos = datos + "fecha final incorrecta";
 			if (v.getTipoVotacion().isEmpty())
 				datos = datos + "tipo de votacion incorrecto";
-			report.setLog(datos);
+			setLog(datos);
 			
 			return false;
 		}
