@@ -1,5 +1,4 @@
 *.class
-*.xlsx
 # Package Files #
 *.jar
 *.war
