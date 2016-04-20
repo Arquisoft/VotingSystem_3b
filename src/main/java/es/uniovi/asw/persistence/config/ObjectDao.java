@@ -44,7 +44,7 @@ public interface ObjectDao {
 	// Opcion
 	public void insertOpcion(Opcion o);
 
-	public void deleteOpcion();
+	public void deleteOpcion(Long id);
 
 	public Votante findOpcion(Long opcion);
 

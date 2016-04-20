@@ -218,13 +218,54 @@ public class ObjectDaoImpl implements ObjectDao {
 
 	@Override
 	public void insertOpcion(Opcion o) {
-		// TODO Auto-generated method stub
+		Connection c;
+		String error = "";
+
+		// if(reportR.validarVotante(v)){
+		try {
+			c = Jdbc.getConnection();
+
+			PreparedStatement ps = c
+					.prepareStatement("INSERT INTO OPCION(ID, NOMBRE,"
+											+ " IDVOTACION) VALUES (?, ?, ?)");
+
+			ps.setLong(1, o.getId());
+			ps.setString(2, o.getNombre());
+			ps.setLong(3, o.getIdVotacion());
+			ps.execute();
+
+			ps.close();
+			c.close();
+
+		} catch (SQLException e) {
+			error = "La opción no se ha podido cargar correctamente en la base"
+					+ " de datos.";
+			System.out.println(error);
+			e.printStackTrace();
+			// reportR.setLog("ERROR: " + error);
+		}
+
 
 	}
 
 	@Override
-	public void deleteOpcion() {
-		// TODO Auto-generated method stub
+	public void deleteOpcion(Long id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("DELETE FROM OPCION WHERE ID = ?");
+			ps.setLong(1, id);
+			ps.executeUpdate();
+
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -236,8 +277,34 @@ public class ObjectDaoImpl implements ObjectDao {
 
 	@Override
 	public List<Opcion> findAllOpciones() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Opcion> opciones = new ArrayList<>();
+
+		try {
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("SELECT * FROM OPCION");
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				
+				Long id = rs.getLong(1);
+				String nombre = rs.getString(2);
+				Long idVotacion = rs.getLong(3);
+				Opcion op = new Opcion(id, nombre, idVotacion);
+				opciones.add(op);
+
+			}
+
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return opciones;
 	}
 
 	@Override
