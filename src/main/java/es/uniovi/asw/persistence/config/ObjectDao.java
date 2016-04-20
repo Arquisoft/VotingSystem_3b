@@ -67,6 +67,8 @@ public interface ObjectDao {
 	boolean setEstadoVoto(Votante v);
 
 	Votante findVotante(String NIF);
+	
+	List<Votos> findAllVotos();
 
 	
 	
