@@ -91,6 +91,12 @@ public class Jdbc {
 		stm.execute(database.getProperty("CREAR_TABLA_VOTANTE"));
 		stm.execute(database.getProperty("CREAR_TABLA_OPCION"));
 		stm.execute(database.getProperty("CREAR_TABLA_VOTOS"));
+		
+		
+		stm.execute(database.getProperty("INSERT_COLEGIO"));
+		stm.execute(database.getProperty("INSERT_VOTACION"));
+		stm.execute(database.getProperty("INSERT_VOTO"));
+		
 		// stm.execute("truncate table CENSOS");
 
 		stm.close();
