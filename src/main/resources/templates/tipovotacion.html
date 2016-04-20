@@ -11,18 +11,25 @@
 		<h2>PÁGINA DE VOTACIÓN DE USUARIOS</h2>
 	</div>
 
-	<form action="/typeVote" method="post" class="form-horizontal">
-		<div class="radio">
-    		<input type="radio" name ="tipo" value = "online" />
-                	<label>Online</label><br />
-                
-        	<input type= "radio" name ="tipo" value = "presencial" />
-        			<label>Presencial</label>          
-   	 	</div>
-   	 	
-   	 	<button type="submit" class="btn btn-primary">Cambiar tipo</button>
+   	 <form id="form_votacion" action="#" th:action="@{/typeVote}" th:object="${voto}" method="post" >
+
+		<label for="tipoVoto">Tipo voto: </label>
+		<input id="tipoVoto" type="text" th:field="*{tipoVoto}"/>
+	
+	
+		<br />	
+		<p>Valores: FISICO/WEB</p>
+		<br />	
 		
-   	 	
-   	 </form>
+		
+		<button type="submit">Enviar</button>
+
+	</form>
+   	 
+   	 
+   	 
+   	 
+   	 
+   	 
 </body>
 </html>

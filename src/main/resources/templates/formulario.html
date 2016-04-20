@@ -8,23 +8,52 @@
 <body>
 	<div class="header" th:fragment="cabecera">
 		<h1>Voting System</h1>
-		<h2>FORMULARIO DE VOTACIÓN</h2>	
+		<h2>FORMULARIO DE VOTACIÓN</h2>
 	</div>
-	
+
 	<form action="/voto" method="post" class="form-horizontal">
-	 	<label for="opciones">Opciones:</label>
-           	 <select>
-              	  <!-- Iterate on ${opciones} -->
-                 <option>Candidato1</option>
-               	 <option>Candidato2</option>
-                 <option>Blanco</option>
-                 <option>Nulo</option>
-            </select>
-            
-     	<div class="form-group">
-			<br /><button type="submit" class="btn btn-primary">Enviar</button>
-			
+		<label for="opciones">Opciones:</label> <select>
+			<!-- Iterate on ${opciones} -->
+			<option>Candidato1</option>
+			<option>Candidato2</option>
+			<option>Blanco</option>
+			<option>Nulo</option>
+		</select>
+
+		<div class="form-group">
+			<br />
+			<button type="submit" class="btn btn-primary">Enviar</button>
+
 		</div>
-     </form>
+	</form>
+
+	<br/>
+	<br/>
+	<br/>
+
+	<form id="form_votacion" action="#" th:action="@{/guardarVoto}"
+		th:object="${votacion}" method="post">
+
+		<select id="opcion" name="country">
+			<option value="US" th:field="*{opcion}">United Stated</option>
+			<option value="CHINA" th:field="*{opcion}">China</option>
+			<option value="SG" th:field="*{opcion}">Singapore</option>
+			<option value="MY" th:field="*{opcion}">Malaysia</option>
+		</select> <input type="hidden" name="_country" value="1" />
+
+		<button type="submit">Enviar</button>
+
+	</form>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

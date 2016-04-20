@@ -16,19 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.uniovi.asw.electors.dbUpdate.ConfigP;
 import es.uniovi.asw.electors.electorsConfig.ConfigR;
-import es.uniovi.asw.model.TipoVoto;
+import es.uniovi.asw.model.TipoVotoForm;
 import es.uniovi.asw.model.Votacion;
 import es.uniovi.asw.model.VotacionForm;
-import es.uniovi.asw.model.Votante;
-import es.uniovi.asw.model.Votos;
+import es.uniovi.asw.model.VotoForm;
 import es.uniovi.asw.physicalVotes.dBUpdate.InsertVotesP;
 import es.uniovi.asw.physicalVotes.dBUpdate.WreportR;
 import es.uniovi.asw.physicalVotes.physicalVotesConfig.Insert;
 import es.uniovi.asw.physicalVotes.physicalVotesConfig.InsertPhysicalR;
 import es.uniovi.asw.physicalVotes.physicalVotesConfig.RVotes;
 import es.uniovi.asw.physicalVotes.reportWriter.WreportP;
-import es.uniovi.asw.virtualVotes.dBUpdate.InsertVirtualVotesP;
-import es.uniovi.asw.virtualVotes.virtualVotesConfig.InsertVirtualR;
 
 @Controller
 @SessionAttributes("vot")
@@ -44,13 +41,18 @@ public class Main {
 	public ModelAndView landing(Model model) {
 		VotacionForm n = new VotacionForm();
 		model.addAttribute("vot", n);
+		
+		TipoVotoForm m = new TipoVotoForm();
+		model.addAttribute("voto", m);
+		
+		
 		LOG.info("Landing page access");
 		return new ModelAndView("landing");
 
 	}
 
 	@RequestMapping("/user")
-	public ModelAndView Usuarios() {
+	public ModelAndView Usuarios(Model model) {
 		try {
 			// ESTO ES PARA PROBAR, EN REALIDAD SE SACARIA DE LA BASE DE DATOS
 			v.setDiaInicio(new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",
@@ -59,8 +61,17 @@ public class Main {
 			e.printStackTrace();
 		}
 		LOG.info("Pagina de usuario");
-
-		return new ModelAndView("tipovotacion");
+		
+		/*TipoVotoForm tipo = new TipoVotoForm();
+		model.addAttribute("voto", tipo);
+		
+		return new ModelAndView("tipovotacion");*/
+		
+		VotoForm votoform = new VotoForm();
+		model.addAttribute("votacion", votoform);
+		
+		return new ModelAndView("formulario");
+		
 		/*
 		 * if (fechaActual.compareTo(v.getDiaInicio()) < 0) return new
 		 * ModelAndView("tipovotacion"); else if
@@ -96,56 +107,6 @@ public class Main {
 			return new ModelAndView("physical").addObject("resultado",
 					"No se han podido almacenar todos los datos.");
 
-	}
-
-	@RequestMapping("/typeVote")
-	public ModelAndView SetTypeVote() throws Exception {
-
-		// OBTENER LOS DATOS DEL FORMULARIO
-
-		// EJEMPLO-----------------------------
-		String NIF = "456";
-		String tipovoto = TipoVoto.FISICO.toString();
-		boolean estado = false;
-		Long idVotacion = new Long(1);
-		// ------------------------------------
-
-		Votante votante = new Votante(NIF, tipovoto, estado, idVotacion);
-
-		new InsertVirtualR(votante).setTypeVote(new InsertVirtualVotesP());
-		;
-
-		return new ModelAndView("exitoGuardarVotacion"); // ?????
-	}
-
-	@RequestMapping("/voto")
-	public ModelAndView GetVoteInfo() throws Exception {
-
-		// OBTENER LOS DATOS DEL FORMULARIO
-		// EJEMPLO-----------------------------
-		String tipoVoto = TipoVoto.FISICO.toString();
-		Long opcionEscogida = new Long(1);
-		int totalVotos = 4;
-		Long idVotacion = new Long(1);
-		String colegioElectoral = "cod1";
-		// ------------------------------------
-
-		Votos votos = new Votos(tipoVoto, opcionEscogida, totalVotos,
-				idVotacion, colegioElectoral);
-
-		// OBTENER LOS DATOS DEL FORMULARIO
-		// EJEMPLO-----------------------------
-		String NIF = "456";
-		String tipovoto = TipoVoto.FISICO.toString();
-		boolean estado = false;
-		// ------------------------------------
-
-		Votante votante = new Votante(NIF, tipovoto, estado, idVotacion);
-
-		new InsertVirtualR(votante, votos)
-				.setTypeVote(new InsertVirtualVotesP());
-
-		return new ModelAndView("exitoGuardarVotacion"); // ?????
 	}
 
 	@RequestMapping(value = "/guardarVotacion")
