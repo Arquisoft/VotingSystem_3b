@@ -40,5 +40,12 @@ public class MainControllerTest {
 				.andExpect(content().string(containsString("Voting")));
 
 	}
+	
+	@Test
+	public void testElectors() throws Exception {
+		mvc.perform(get("/admin")).andExpect(status().isOk())
+				.andExpect(content().string(containsString("Configuración de la votación")));
+
+	}
 
 }

@@ -8,10 +8,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uniovi.asw.electors.dbUpdate.ConfigP;
+import es.uniovi.asw.electors.dbUpdate.InsertConfig;
+import es.uniovi.asw.electors.dbUpdate.WreportR;
+import es.uniovi.asw.electors.reportWriter.WreportP;
 import es.uniovi.asw.model.Votacion;
 import es.uniovi.asw.persistence.config.ObjectDaoImpl;
 
-public class VotacionTest {
+public class ElectorsTest {
 
 	ObjectDaoImpl dao = null;
 
@@ -31,20 +35,21 @@ public class VotacionTest {
 	public void test() {
 		
 		Votacion v = new Votacion(new Date(), new Date(), "Referendum");
-		dao.insertVotacion(v, null);
+		
+		InsertConfig insert = new ConfigP(new WreportR(new WreportP()));
+		insert.insert(v);
 		assertEquals(2, dao.findAllVotaciones().size());
 		assertEquals(v.getTipoVotacion(), dao.findVotacion(new Long(2))
 				.getTipoVotacion());
 	}
 	
 	// Votación sin fecha inicial
-	
 	@Test(expected = NullPointerException.class)
 	public void test2(){
 		
 		Votacion v = new Votacion(null, new Date(), "Referendum");
-		
-		dao.insertVotacion(v, null);
+		InsertConfig insert = new ConfigP(new WreportR(new WreportP()));
+		insert.insert(v);
 		assertEquals(0, dao.findAllVotaciones().size());
 	}
 	
@@ -54,22 +59,23 @@ public class VotacionTest {
 	public void test3(){
 		
 		Votacion v = new Votacion(new Date(), null, "Referendum");
-		
-		dao.insertVotacion(v, null);
+		InsertConfig insert = new ConfigP(new WreportR(new WreportP()));
+		insert.insert(v);
+
 		assertEquals(0, dao.findAllVotaciones().size());
-		
 	}
 	
 	// Votacion correcta de tipo Generales
 	@Test
 	public void test4() {
-
+		dao = new ObjectDaoImpl();
 		dao.restoreDatabase();
-		Votacion v = new Votacion(new Date(), new Date(), "Generales");
-		dao.insertVotacion(v, null);
+		Votacion v = new Votacion(new Date(), new Date(), "General");
+		InsertConfig insert = new ConfigP(new WreportR(new WreportP()));
+		insert.insert(v);
+		
 		assertEquals(2, dao.findAllVotaciones().size());
-		assertEquals(v.getTipoVotacion(), dao.findVotacion(new Long(2))
-				.getTipoVotacion());
+		assertEquals(v.getTipoVotacion(), dao.findVotacion(new Long(1)).getTipoVotacion());
 	}
 
 	

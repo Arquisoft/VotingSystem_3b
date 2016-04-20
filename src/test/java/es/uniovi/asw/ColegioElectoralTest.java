@@ -28,8 +28,6 @@ public class ColegioElectoralTest {
 	public void test() {
 		dao.insertColegio(new ColegioElectoral("4", "Barrio 2", "Gijon", "Asturies"));
 		assertEquals(4,dao.findAllColegios().size()); 
-		
-	
 	}
 	
 	
