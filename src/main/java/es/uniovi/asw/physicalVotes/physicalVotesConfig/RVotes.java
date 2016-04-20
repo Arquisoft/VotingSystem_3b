@@ -46,33 +46,38 @@ public class RVotes implements ReadVotes {
 					// Tipo voto
 					if (row.getCell(0) == null)
 						arr.add("");
-					else
+					else {
 						arr.add(row.getCell(0).toString());
-					System.out.println(row.getCell(0).toString());
+						System.out.println(row.getCell(0).toString());
+					}
 					// opcion escogida
 					if (row.getCell(1) == null)
 						arr.add("-1");
-					else
+					else {
 						arr.add(row.getCell(1).toString());
-					System.out.println(row.getCell(1).toString());
+						System.out.println(row.getCell(1).toString());
+					}
 					// total votos
 					if (row.getCell(2) == null)
 						arr.add("-1");
-					else
+					else {
 						arr.add(row.getCell(2).toString());
-					System.out.println(row.getCell(2).toString());
+						System.out.println(row.getCell(2).toString());
+					}
 					// id votacion
 					if (row.getCell(3) == null)
 						arr.add("-1");
-					else
+					else {
 						arr.add(row.getCell(3).toString());
-					System.out.println(row.getCell(3).toString());
+						System.out.println(row.getCell(3).toString());
+					}
 					// codigo colegio electoral
 					if (row.getCell(4) == null)
 						arr.add("");
-					else
+					else{
 						arr.add(row.getCell(4).toString());//
-					System.out.println(row.getCell(4).toString());
+						System.out.println(row.getCell(4).toString());
+					}
 
 					mapa.put(cont++, arr);
 				}

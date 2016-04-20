@@ -17,15 +17,17 @@ public class InsertVotesP implements Insert {
 	}
 
 	/**
-	 * Método que inserta un nuevo votante en la base de datos Si se produce un
+	 * Método que inserta un nuevo voto en la base de datos Si se produce un
 	 * error se enviará a ReportWriter para que sea almacenado en el fichero de
 	 * LOG
 	 */
 	@Override
 	public boolean insertar(Votos v) {
-		// if(reportR.validarVotante(v)){
-		return new ObjectDaoImpl().insertVotos(v);
-		// }
+		 if(reportR.validarVotante(v)){
+			 return new ObjectDaoImpl().insertVotos(v);
+		} else{
+			return false;
+		}
 	}
 
 }
