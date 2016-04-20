@@ -397,6 +397,44 @@ public class ObjectDaoImpl implements ObjectDao {
 
 		return vot;
 	}
+	
+	@Override
+	public List<Votos> findAllVotos() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Votos> votos = new ArrayList<>();
+
+		try {
+
+			con = Jdbc.getConnection();
+			ps = con.prepareStatement("SELECT * FROM VOTOS");
+
+			rs = ps.executeQuery();
+			while (rs.next()) {
+
+				
+				
+				String tipoVoto = rs.getString(1);
+				Long opcionEscogida = rs.getLong(2);
+				int totalVotos = rs.getInt(3);
+				Long idVotacion = rs.getLong(4);
+				String colegioElectoral = rs.getString(5);
+				Votos v = new Votos(tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
+				
+				votos.add(v);
+
+			}
+
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return votos;
+	}
 
 
 	@Override
@@ -460,4 +498,6 @@ public class ObjectDaoImpl implements ObjectDao {
 		return true;
 
 	}
+
+	
 }
