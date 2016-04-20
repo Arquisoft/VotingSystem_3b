@@ -30,8 +30,11 @@ public class VotosTest {
 	public void test() {
 		
 		dao.insertVotos(new Votos("Virtual", new Long(1), 1, new Long(1), "12"));
+		assertEquals(1, dao.findAllVotos().size());
+		assertEquals("Virtual", dao.findVotos(new Long(1)).getTipoVoto());
+		dao.insertVotos(new Votos("Fisico", new Long(1), 1, new Long(1), "12"));
+		assertEquals(2, dao.findAllVotos().size());
 		
-		assertEquals(1, dao.findAllVotaciones().size());
 		
 	}
 

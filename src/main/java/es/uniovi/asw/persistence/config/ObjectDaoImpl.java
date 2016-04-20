@@ -380,7 +380,16 @@ public class ObjectDaoImpl implements ObjectDao {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				vot = new Votos();
+				
+				Long idC = rs.getLong(1);
+				String tipoVoto = rs.getString(2);
+				Long opcionEscogida = rs.getLong(3);
+				int totalVotos = rs.getInt(4);
+				Long idVotacion = rs.getLong(5);
+				String colegioElectoral = rs.getString(6);
+				
+				vot = new Votos(idC, tipoVoto, opcionEscogida, totalVotos,
+												  idVotacion, colegioElectoral);
 			}
 
 			ps.close();
@@ -414,13 +423,13 @@ public class ObjectDaoImpl implements ObjectDao {
 			while (rs.next()) {
 
 				
-				
-				String tipoVoto = rs.getString(1);
-				Long opcionEscogida = rs.getLong(2);
-				int totalVotos = rs.getInt(3);
-				Long idVotacion = rs.getLong(4);
-				String colegioElectoral = rs.getString(5);
-				Votos v = new Votos(tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
+				Long id = rs.getLong(1);
+				String tipoVoto = rs.getString(2);
+				Long opcionEscogida = rs.getLong(3);
+				int totalVotos = rs.getInt(4);
+				Long idVotacion = rs.getLong(5);
+				String colegioElectoral = rs.getString(6);
+				Votos v = new Votos(id, tipoVoto, opcionEscogida, totalVotos, idVotacion, colegioElectoral);
 				
 				votos.add(v);
 

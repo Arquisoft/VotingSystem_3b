@@ -20,6 +20,18 @@ public class Votos {
 		this.idVotacion = idVotacion;
 		this.colegioElectoral = colegioElectoral;
 	}
+	
+
+	public Votos(Long id, String tipoVoto, Long opcionEscogida, int totalVotos,
+			Long idVotacion, String colegioElectoral) {
+		super();
+		this.id = id;
+		this.tipoVoto = tipoVoto;
+		this.opcionEscogida = opcionEscogida;
+		this.totalVotos = totalVotos;
+		this.idVotacion = idVotacion;
+		this.colegioElectoral = colegioElectoral;
+	}
 
 	public Long getId() {
 		return id;

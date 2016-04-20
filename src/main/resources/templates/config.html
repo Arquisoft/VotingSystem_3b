@@ -1,25 +1,29 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
-<meta charset="UTF-8" />
+<head>
+	<meta charset="UTF-8" />
+	<link href="../static/css/voting.css"
+          th:href="@{/css/voting.css}"
+          rel="stylesheet" />
+	<h1>Voting System - Configuración de la votación</h1>
 </head>
 <body>
 
 	<form id="form_votacion" action="#" th:action="@{/guardarVotacion}" th:object="${vot}" method="post" >
 
 		<label for="diainicio">Dia inicio </label>
-		<input id="diainicio" type="text" th:field="*{fechaInicio}"/>
+		<input id="diainicio" type="text" th:field="*{fechaInicio}" placeholder="dd/mm/aaaa hh:mm" />
 	
 	
 	
 		<label for="diafin">Dia fin </label>
-		<input id="diafin" type="text" th:field="*{fechaFin}"/>
+		<input id="diafin" type="text" th:field="*{fechaFin}" placeholder="dd/mm/aaaa hh:mm" />
 	
 		<br />
 		<br />	
 		
 		 <label for="opciones">Tipo de votación:</label>
-		 <input id="tipoVotacion" type="text" th:field="*{tipoVotacion}"/>
+		 <input id="tipoVotacion" type="text" th:field="*{tipoVotacion}" />
 		
 		<button type="submit">Enviar</button>
 
