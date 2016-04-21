@@ -52,6 +52,7 @@ public class InsertVirtualR implements InsertVirtual {
 		return votante;
 	}
 
+	@Override
 	public void setVotante(Votante votante) {
 		this.votante = votante;
 	}
@@ -60,6 +61,7 @@ public class InsertVirtualR implements InsertVirtual {
 		return votos;
 	}
 
+	@Override
 	public void setVotos(Votos votos) {
 		this.votos = votos;
 	}
