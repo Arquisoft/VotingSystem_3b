@@ -56,6 +56,7 @@ public class VotacionTest {
 		Votacion v = new Votacion(new Date(), null, "Referendum");
 		
 		dao.insertVotacion(v, null);
+		assertEquals(0, dao.findAllVotaciones().size());
 		
 	}
 	
